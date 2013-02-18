@@ -9,17 +9,17 @@
     <section class="row-fluid">
         <div class="row">
             <div class="span4">
-                <a href="<?php echo \Config::get('BASE_URL') . 'contents/auth/login/facebook/'; ?>">
+                <a href='contents/auth/login/facebook/'>
                     <?php echo \Asset::img('contents/login/facebook_login.png'); ?>
                 </a>
             </div>
             <div class="span4">
-                <a href="<?php echo \Config::get('BASE_URL') . 'contents/auth/login/facebook/'; ?>">
+                <a href='contents/auth/login/facebook/'>
                     <?php echo \Asset::img('contents/login/twitter_login.png'); ?>
                 </a>
             </div>
             <div class="span4">
-                <a href="<?php echo \Config::get('BASE_URL') . 'contents/auth/login/facebook/'; ?>">
+                <a href='contents/auth/login/facebook/'>
                     <?php echo \Asset::img('contents/login/line_login.png'); ?>
                 </a>
             </div>

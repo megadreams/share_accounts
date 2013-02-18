@@ -10,26 +10,24 @@
     <?php echo Asset::js('jquery.js'); ?>
     <style>
         body{
-            background-image: url("<?php echo \Config::get('BASE_URL') . 'assets/img/contents/background2.png'?>");
+            background-image: url('assets/img/contents/background2.png');
         }
         #contents_title {
             width:100%;
             height:20px;
             padding:10px 0px;
 /*            
-            background-image: url("<?php echo \Config::get('BASE_URL') . 'assets/img/contents/contents_title.png'?>");
+            background-image: url('assets/img/contents/contents_title.png');
             background-size:100% 90%;
             background-repeat   : no-repeat;
  */
             background:black;
             box-shadow:2px 2px 2px #000000;
             color:white;
-            font-family:"ヒラギノ明朝 Pro W6", "Hiragino Mincho Pro", "HGS明朝E", "ＭＳ Ｐ明朝", serif;
             font-weight: normal;
             font-size:18px;
         }
         
-        /*TOPメニューのアイコン*/
         .category {
             position:relative;
         }
@@ -47,21 +45,21 @@
         .category_fusen {
             width:70%;
         }
-        /*貸している＆借りているリストの背景*/
+        
         .list {
             color:black;
             padding:5px;
             width:300px;
             height:60px;
-            background-image: url("<?php echo \Config::get('BASE_URL') . 'assets/img/contents/lendandborrow/fusen01.png'?>");            
+            background-image: url('assets/img/contents/lendandborrow/fusen01.png');            
         }
         .list [class*="span"] {
             min-height: 0px;
         }
-        /*編集するときの付箋*/
+        
         .editdata {
 /*
-            background-image: url("<?php echo \Config::get('BASE_URL') . 'assets/img/contents/fusen/big003.png'?>");            
+            background-image: url( 'assets/img/contents/fusen/big003.png');        
             background-size:100%;
 */
             padding:10px;
@@ -78,10 +76,10 @@
     <?php echo $content; ?>
     <footer>
         <div>
-            <a href="<?php echo \Config::get('BASE_URL') . 'contents/top'; ?>">TOPへ戻る</a>
+            <a href='contents/top'>TOPへ戻る</a>
         </div>
         <p>
-            <small>Copyright © 2012- <?php echo date('y');?> megadreams</small>
+            <small>Copyright 2012- <?php echo date('y');?> megadreams</small>
         </p>
     </footer>
 </body>
