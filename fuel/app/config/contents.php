@@ -1,0 +1,27 @@
+<?php
+return array(
+    'type_lend'   => 'lend',
+    'type_borrow' => 'borrow',
+    
+    'status' => array(
+        //貸している人一覧に出すステータスの文言
+        'lend' => array(
+            '貸している',
+            '受取済',
+            '',
+        ),
+        //借りているる人一覧に出すステータスの文言
+        'borrow' => array(
+            '借りている',
+            '支払済',
+            '',            
+        )
+    ),
+    //Facebook
+    'facebook' => array(
+      'APP_ID' => '344664518982268', 
+      'APP_SECRET' => 'f6d5ea7a24a9258c96a2caa4c5a0a052',
+      'CALLBACK' => 'http://localhost/share_accounts/public/contents/auth/callback/facebook',
+    ),
+    
+);
