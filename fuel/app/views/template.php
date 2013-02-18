@@ -10,7 +10,7 @@
     <?php echo Asset::js('jquery.js'); ?>
     <style>
         body{
-            background-image: url('assets/img/contents/background2.png');
+            background-image: url('/assets/img/contents/background2.png');
         }
         #contents_title {
             width:100%;
