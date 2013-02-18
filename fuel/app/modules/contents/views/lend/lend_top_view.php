@@ -3,8 +3,8 @@
 <div class="container-fluid main-contents">
     <header class="header">
         <div>
-            <a href="<?php echo \Config::get('BASE_URL');?>contents/top">戻る</a>
-            <a href="<?php echo \Config::get('BASE_URL');?>contents/lend/edit_data">新しく登録する</a>
+            <a href="<?php echo BASE_URL;?>contents/top">戻る</a>
+            <a href="<?php echo BASE_URL;?>contents/lend/edit_data">新しく登録する</a>
         </div>
         <h1 id="contents_title">貸しているリスト</h1>        
         <p>
@@ -13,7 +13,7 @@
      </header>
      <section class="row-fluid">
         <?php foreach($view_data['lend_and_borrow_mst'] as $lend_and_borrow_mst): ?>
-            <a href="<?php echo \Config::get('BASE_URL');?>contents/lend/edit_data/<?php echo $lend_and_borrow_mst->id;?>">
+            <a href="<?php echo BASE_URL;?>contents/lend/edit_data/<?php echo $lend_and_borrow_mst->id;?>">
                 <div class="list">
                     <div class="row">
                         <div class="span6">

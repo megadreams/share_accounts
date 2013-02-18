@@ -24,12 +24,31 @@ Autoloader::register();
  * Fuel::STAGE
  * Fuel::PRODUCTION
  */
-Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : Fuel::DEVELOPMENT);
+
+
+// 動作環境切り替え
+define('ENVIRONMENT_DEVELOPMENT', 'development');
+define('ENVIRONMENT_TESTING'    , 'testing');
+define('ENVIRONMENT_PRODUCTION' , 'production');
+
+
+//本番環境
+if ( file_exists(DOCROOT.'/../.production') || file_exists(DOCROOT.'/.production')) {
+	Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : Fuel::PRODUCTION);
+	define('ENVIRONMENT', ENVIRONMENT_PRODUCTION);
+
+//テスト環境
+} else if (file_exists(DOCROOT.'/../.test') || file_exists(DOCROOT.'/.test')) {
+	Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : Fuel::TEST);
+	define('ENVIRONMENT', ENVIRONMENT_TESTING);	
+	define('BASE_URL', 'http://megadreams14.com/app/share_accounts/public/');	
+//ローカル環境
+} else {
+	Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : Fuel::DEVELOPMENT);
+	define('ENVIRONMENT', ENVIRONMENT_DEVELOPMENT);	
+	define('BASE_URL', 'http://localhost/share_accounts/public/');	
+}
+   
 
 // Initialize the framework with the config file.
 Fuel::init('config.php');
-
-
-//ローカル環境とサーバでの切り替え処理を今後入れる
-//define('BASE_URL', '/share_accounts/public');
-define('BASE_URL', 'http://share_accounts.com/');

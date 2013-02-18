@@ -17,7 +17,7 @@ class Controller_Auth extends \Controller_Commonlogin {
 
         $login = \Config::get($_provider);
         $authURL = 'http://www.facebook.com/dialog/oauth?client_id=' . 
-                $login['APP_ID'] . '&redirect_uri=' . urlencode($login['CALLBACK']);
+                $login['APP_ID'] . '&redirect_uri=' . urlencode(BASE_URL . $login['CALLBACK']);
         \Response::redirect($authURL, 'location');
     }
     
@@ -28,7 +28,7 @@ class Controller_Auth extends \Controller_Commonlogin {
         $code = $_REQUEST['code'];
 
         $token_url = 'https://graph.facebook.com/oauth/access_token?client_id='.
-            $login['APP_ID'] . '&redirect_uri=' . urlencode($login['CALLBACK']) . '&client_secret='.
+            $login['APP_ID'] . '&redirect_uri=' . urlencode(BASE_URL . $login['CALLBACK']) . '&client_secret='.
             $login['APP_SECRET'] . '&code=' . $code;
 
         // access token 取得

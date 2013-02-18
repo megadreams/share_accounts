@@ -1,5 +1,5 @@
 <div>
-    <a href="<?php echo \Config::get('BASE_URL');?>contents/borrow/edit_data">新しく登録する</a>
+    <a href="<?php echo BASE_URL . '/contents/borrow/edit_data';?>">新しく登録する</a>
 </div>
 
 <div>
@@ -22,7 +22,7 @@
                 <td><?php echo $view_data['user_list'][$lend_and_borrow_mst->lend_user_id]->user_name;?></td>
                 <td><?php echo $lend_and_borrow_mst->money;?></td>
                 <td><?php echo \Config::get('status')['borrow'][$lend_and_borrow_mst->status];?></td>                
-                <td><a href="<?php echo \Config::get('BASE_URL');?>contents/borrow/edit_data/<?php echo $lend_and_borrow_mst->id;?>">編集</a></td>
+                <td><a href="<?php echo BASE_URL . 'contents/borrow/edit_data/' . $lend_and_borrow_mst->id;?>">編集</a></td>
             </tr>
         <?php endforeach; ?>
     </tbody>

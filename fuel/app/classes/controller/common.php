@@ -33,7 +33,6 @@ class Controller_Common extends \Controller_Template {
         $lib_user_profile = new Lib_UserProfile();
         $this->user_profile = $lib_user_profile->createUserProfile($this->user_profile_id, $user_name);
         $this->model_wrap = new Lib_Modelwrap();
-        
     }
 
     public function after($response) {

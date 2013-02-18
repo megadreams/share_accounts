@@ -1,5 +1,5 @@
 <div>
-    <a href="http://localhost/share_accounts/public/contents/borrow/">戻る</a>
+    <a href="<?php echo BASE_URL . '/contents/borrow/';?>">戻る</a>
 </div>
 
 
@@ -106,7 +106,7 @@ $(function (){
         
         $.ajax({
             dataType: 'json',
-            url: "http://localhost/share_accounts/public/contents/ajaxapi/lend_and_borrow_regist.json",
+            url: "<?php echo BASE_URL;?>contents/ajaxapi/lend_and_borrow_regist.json",
             type: "post",
             data: postData,
             success: function(data) {

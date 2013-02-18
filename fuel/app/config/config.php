@@ -44,8 +44,5 @@ return array(
                 'contents' => null,
             ),            
     ),
-    'BASE_URL' => 'http://localhost/share_accounts/public/',
-    
-
     
 );
