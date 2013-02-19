@@ -4,15 +4,15 @@ use Orm\Model;
 class Model_User_Facebook extends Model
 {
 	public static $_table_name = "user_facebook";
-
-        protected static $_properties = array(
+    
+	protected static $_properties = array(
 		'id',
 		'fb_id',
 		'name',
 		'created_at',
 		'updated_at',
 	);
-        
+
 	protected static $_observers = array(
 		'Orm\Observer_CreatedAt' => array(
 			'events' => array('before_insert'),
@@ -27,13 +27,10 @@ class Model_User_Facebook extends Model
 	public static function validate($factory)
 	{
 		$val = Validation::forge($factory);
-		$val->add_field('name', 'name', 'required|max_length[255]');
-		$val->add_field('fb_id', 'fb_id', 'required|valid_string[numeric]');
-            	return $val;
+		$val->add_field('fb_id', 'Fb Id', 'required|max_length[255]');
+		$val->add_field('name', 'Name', 'required|max_length[255]');
+
+		return $val;
 	}
 
 }
-
-
-
-

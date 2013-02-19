@@ -13,14 +13,14 @@
     <section class="row-fluid">
         <div class="row">
             <div class="span6">
-                <a class="category" href="<?php echo BASE_URL . "/contents/lend";?>">
+                <a class="category" href="<?php echo BASE_URL . "contents/lendandborrow/top/lend";?>">
                     <?php echo \Asset::img('contents/fusen/big002.png', array('class' => 'category_fusen'));?>
                     <?php echo \Asset::img('contents/pin/003.png', array('class' => 'category_pin'));?>
                     <span class="category_name">貸している</span>
                 </a>
             </div>
             <div class="span6">
-                <a class="category" href="<?php echo BASE_URL . "/contents/borrow";?>">
+                <a class="category" href="<?php echo BASE_URL . "contents/lendandborrow/top/borrow";?>">
                     <?php echo \Asset::img('contents/fusen/big003.png', array('class' => 'category_fusen'));?>
                     <?php echo \Asset::img('contents/pin/003.png',array('class' => 'category_pin'));?>
                     <span class="category_name">借りている</span>

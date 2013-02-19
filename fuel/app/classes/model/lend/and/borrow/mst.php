@@ -3,13 +3,13 @@ use Orm\Model;
 
 class Model_Lend_And_Borrow_Mst extends Model
 {
-//    	protected static $_belongs_to = array('user_profile');
-
+	public static $_table_name = "lend_and_borrow";
 	protected static $_properties = array(
 		'id',
-		'lend_user_id',
-		'borrow_user_id',
-		'money',
+		'from_user_id',
+		'to_user_id',
+		'category_mst_id',
+		'item',
 		'date',
 		'status',
 		'memo',
@@ -32,10 +32,14 @@ class Model_Lend_And_Borrow_Mst extends Model
 	public static function validate($factory)
 	{
 		$val = Validation::forge($factory);
-		$val->add_field('lend_user_id', 'Lend User Id', 'required|valid_string[numeric]');
-		$val->add_field('borrow_user_id', 'Borrow User Id', 'required|valid_string[numeric]');
-		$val->add_field('money', 'Money', 'required|valid_string[numeric]');
-		$val->add_field('date', 'Lend User Id', 'required|valid_string[numeric]');
+		$val->add_field('from_user_id', 'From User Id', 'required|valid_string[numeric]');
+		$val->add_field('to_user_id', 'To User Id', 'required|valid_string[numeric]');
+		$val->add_field('category_mst_id', 'Category Mst Id', 'required|valid_string[numeric]');
+		$val->add_field('item', 'Item', 'required|max_length[255]');
+		$val->add_field('date', 'Date', 'required|valid_string[numeric]');
+		$val->add_field('status', 'Status', 'required|max_length[255]');
+		$val->add_field('memo', 'Memo', 'required|max_length[255]');
+		$val->add_field('limit', 'Limit', 'required|valid_string[numeric]');
 
 		return $val;
 	}

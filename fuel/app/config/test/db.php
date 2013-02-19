@@ -7,10 +7,15 @@
 
 return array(
 	'default' => array(
-		'connection'  => array(
-			'dsn'        => 'mysql:host=localhost;dbname=fuel_test',
-			'username'   => 'fuel_app',
-			'password'   => 'super_secret_password',
-		),
-	),
+                'type'			=> 'mysql',
+                'connection'	=> array(
+                        'hostname'		=> 'localhost',
+                        'port'			=> '3306',
+                        'database'		=> 'share_accounts',
+                        'username'		=> 'share_accounts',
+                        'password'		=> 'share_accounts',
+                ),
+                // 		'table_prefix' => 'ls_',
+                'profiling' => true
+        )
 );
