@@ -44,7 +44,6 @@ class Controller_Auth extends \Controller_Commonlogin {
         $user_id = $user->id;
         $name    = $user->name;
 
-
         $user_facebook = $this->model_wrap->call('Model_User_Facebook', 'find', 'first', array(
             'where' => array(
                 'fb_id' => $user_id
