@@ -24,8 +24,8 @@ class Controller_Common extends \Controller_Template {
         //親クラスのbeforeを呼び出して, $this->templateを使えるようにしてもらう
         parent::before();
         //ログインしているかのチェック
-//        $this->user_profile_id = \Session::get('user_profile_id');
-        $this->user_profile_id = 1;
+        $this->user_profile_id = \Session::get('user_profile_id');
+//        $this->user_profile_id = 1;
         if ($this->user_profile_id === null) {
             \Response::redirect('contents/auth/index');
         }
