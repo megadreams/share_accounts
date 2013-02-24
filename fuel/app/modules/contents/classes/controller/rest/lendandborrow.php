@@ -164,8 +164,14 @@ class Controller_Rest_lendandborrow extends \Controller_Commonrest {
                 'user_profile_id' => $my_user_id,
                 'friend_user_id'  => $user_profile->id,
             );
-            $user_friends = $this->model_wrap->getModelInstance('Model_User_Friend', $insert_data);
-            $user_friends->save();
+            $user_friends1 = $this->model_wrap->getModelInstance('Model_User_Friend', $insert_data);
+            $insert_data = array(
+                'user_profile_id' => $user_profile->id,
+                'friend_user_id'  => $my_user_id,
+            );            
+            $user_friends2 = $this->model_wrap->getModelInstance('Model_User_Friend', $insert_data);
+            $user_friends1->save();
+            $user_friends2->save();
         }
         
         return $user_profile;

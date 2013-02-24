@@ -81,12 +81,12 @@ class Controller_Lendandborrow extends \Controller_Common {
         
         
          //ユーザの友達リストを取得する
-        $this->view_data['user_friend_list'] = $this->model_wrap->call('Model_User_Friend', 'find', array(
-            'where' => array(
-                'user_profile_id' => 'ユーザID'
-            )
-        ));
-       
+        $sql  = "SELECT up.id, up.user_name, up.user_facebook_id FROM user_friends uf";
+        $sql .= " INNER JOIN user_profile up on up.id = uf.friend_user_id";
+        $sql .= " WHERE ";
+        $sql .= " user_profile_id = " . $this->user_profile_id;
+        
+        $this->view_data['user_friend_list'] = $this->model_wrap->call('DB', 'query', $sql);
         
         if ($lend_and_borrow_mst_id !== null) {
             //編集の場合情報を取得
@@ -98,7 +98,6 @@ class Controller_Lendandborrow extends \Controller_Common {
                 )
             );
         }
-        
         $this->view_data['user_profiel'] = $this->user_profile;
         $this->view_data['type'] = $type;
         

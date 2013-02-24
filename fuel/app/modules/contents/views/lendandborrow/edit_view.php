@@ -5,7 +5,6 @@
 <div>
     <?php echo $view_data['user_profile']->user_name; ?>さんが，借りているリスト
 </div>
-
 <div>
     <h1>新規登録</h1>
     <h1>編集</h1>
@@ -26,8 +25,8 @@
                 <div class="user_select">
                 <?php if (count($view_data['user_friend_list']) > 0):?>
                     <select class="regist" name="<?php echo ($view_data['type'] === \Config::get('TYPE_LEND'))? 'to_user_id': 'from_user_id'?>">
-                        <?php foreach($user_friend_list as $friend): ?>
-                            <option value=""><?php echo $friend;?></option>
+                        <?php foreach($view_data['user_friend_list'] as $friend): ?>
+                            <option value="<?php echo $friend->id;?>"><?php echo $friend->user_name;?></option>
                         <?php endforeach; ?>
                     </select>
                 <?php else: ?>
@@ -35,17 +34,19 @@
                 <?php endif;?>                  
                 <div>
                     <label>
-                        <input class="get_app_friends"   name="from_user" type="radio">アプリの友達リストから取得
+                        <input class="get_app_friends"   name="from_user" type="radio" checked>アプリの友達リストから取得
                     </label>
                     <label>
                         <input class="get_fb_friends"   name="from_user" type="radio">FBから友達リストを取得する
                     </label>
+                    <!--
                     <label>
                         <input class="get_line_friends" name="from_user" type="radio">LINEから友達リストを取得する
                     </label>
                     <label>
                         <input class="get_tw_friends"   name="from_user" type="radio">Twitterから友達リストを取得する
                     </label>
+                    -->
                 </div>
             </td>
         </tr>
