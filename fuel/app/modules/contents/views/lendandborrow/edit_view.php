@@ -14,7 +14,7 @@
             <tr>
                 <th>日付</th>
                 <td>
-                    <input type="datetime" class="regist" name="date" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? date('Ymd', strtotime($view_data['lend_and_borrow_mst']->date)):'';?>">
+                    <input type="date" class="regist" name="date" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? date('Ymd', strtotime($view_data['lend_and_borrow_mst']->date)):'';?>">
                 </td>
             </tr>
             <tr>
