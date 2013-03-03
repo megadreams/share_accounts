@@ -24,6 +24,26 @@ class Controller_Rest_lendandborrow extends \Controller_Commonrest {
         
     }
     
+    /*
+     * アプリの友達リストを返すAPI
+     */
+    public function get_app_friends ($user_profile_id) {
+        //FBから友達リストの追加
+        $sql  = "SELECT up.id, up.user_name FROM user_friends uf";
+        $sql .= " INNER JOIN user_profile up on up.id = uf.friend_user_id";
+        $sql .= " WHERE ";
+        $sql .= " uf.user_profile_id = " . $user_profile_id . ";";
+        $model_wrap = new \Lib_Modelwrap();
+        $user_friend_list = $model_wrap->call('DB', 'query', $sql);
+        $lists = array();
+        if (count($user_friend_list) > 0) {
+            foreach($user_friend_list as $friend) {
+                $lists[] = $friend;
+            }
+        }
+        $this->response(array('data' => $lists), 200);
+        
+    }    
     
     
     /*

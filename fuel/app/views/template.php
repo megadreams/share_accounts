@@ -8,79 +8,12 @@
     <?php echo Asset::css('base.css'); ?>
     <?php //echo Asset::css('content.css'); ?>        
     <?php echo Asset::js('jquery.js'); ?>
-    <style>
-        body{
-            background-image: url('assets/img/contents/background2.png');
-        }
-        #contents_title {
-            width:100%;
-            height:20px;
-            padding:10px 0px;
-/*            
-            background-image: url('assets/img/contents/contents_title.png');
-            background-size:100% 90%;
-            background-repeat   : no-repeat;
- */
-            background:black;
-            box-shadow:2px 2px 2px #000000;
-            color:white;
-            font-weight: normal;
-            font-size:18px;
-        }
-        
-        .category {
-            position:relative;
-        }
-        .category_name {
-            position:absolute;
-            top: -6px;
-            left: 17px;            
-        }
-        .category_pin {
-            position:absolute;
-            top: -55px;
-            left: 42px;
-            width: 20%;            
-        }
-        .category_fusen {
-            width:70%;
-        }
-        
-        .list {
-            color:black;
-            padding:5px;
-            width:300px;
-            height:60px;
-            background-image: url('assets/img/contents/lendandborrow/fusen01.png');            
-        }
-        .list [class*="span"] {
-            min-height: 0px;
-        }
-        
-        .editdata {
-/*
-            background-image: url( 'assets/img/contents/fusen/big003.png');        
-            background-size:100%;
-*/
-            padding:10px;
-            width:250px;
-            height:250px;
-            background:rgba(200,200,200,0.7);
-            border-radius:10px;
-            box-shadow:2px 2px 2px #808080;
-        }
-        
-    </style>
+    <?php echo Asset::js('jquery.activity-indicator-1.0.0.min.js'); ?>
 </head>
 <body>
     <?php echo $content; ?>
     <footer>
-        <div>
-            <a href="<?php echo BASE_URL . 'contents/top/';?>">
-        </div>
-        <p>
-            <small>Copyright 2012- <?php echo date('y');?> megadreams</small>
-        </p>
+        <small>Copyright 2012- <?php echo date('Y');?> megadreams　All Rights Reserved.</small>
     </footer>
 </body>
 </html>

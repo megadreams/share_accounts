@@ -47,7 +47,7 @@ class Controller_Common extends \Controller_Template {
         return $response;
     }
     
-     protected function viewContent($path = null, $title = '大感謝祭') {        
+     protected function viewWrap($path = null, $title = '貸し借り管理') {        
         //Viewのtemplate.phpにそれぞれ渡す
 
         //ユーザ本人の情報を取得

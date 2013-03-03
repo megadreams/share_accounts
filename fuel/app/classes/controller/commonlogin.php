@@ -16,7 +16,7 @@ class Controller_Commonlogin extends \Controller_Template {
         $this->lib_userprofile = new Lib_UserProfile();
     }
     
-     protected function viewContent($path = null, $title = '大感謝祭') {        
+     protected function viewWrap($path = null, $title = '大感謝祭') {        
         //Viewのtemplate.phpにそれぞれ渡す
         
         $this->template->content = \View::forge($path,  array('view_data' => $this->view_data, 'title' => $title));

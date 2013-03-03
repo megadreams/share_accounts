@@ -39,7 +39,7 @@ class Controller_Lendandborrow extends \Controller_Common {
             $title = '借りているリスト';
         }
         
-        $this->viewContent('lendandborrow/top', $title);
+        $this->viewWrap('lendandborrow/top', $title);
         
     }
     
@@ -79,14 +79,23 @@ class Controller_Lendandborrow extends \Controller_Common {
      */
     public function action_edit_data($type, $lend_and_borrow_mst_id = null) {
         
-        
          //ユーザの友達リストを取得する
+        
+
         $sql  = "SELECT up.id, up.user_name, up.user_facebook_id FROM user_friends uf";
         $sql .= " INNER JOIN user_profile up on up.id = uf.friend_user_id";
         $sql .= " WHERE ";
         $sql .= " user_profile_id = " . $this->user_profile_id;
         
-        $this->view_data['user_friend_list'] = $this->model_wrap->call('DB', 'query', $sql);
+        $user_friend_list = $this->model_wrap->call('DB', 'query', $sql);
+        $lists = array();
+        if (count($user_friend_list) > 0) {
+            foreach($user_friend_list as $friend) {
+                $lists[] = $friend;
+            }
+        }
+        $this->view_data['user_friend_list'] = $lists;
+
         
         if ($lend_and_borrow_mst_id !== null) {
             //編集の場合情報を取得
@@ -101,7 +110,7 @@ class Controller_Lendandborrow extends \Controller_Common {
         $this->view_data['user_profiel'] = $this->user_profile;
         $this->view_data['type'] = $type;
         
-        $this->viewContent('lendandborrow/edit_view', '登録');
+        $this->viewWrap('lendandborrow/edit_view', '登録');
     }
         
    

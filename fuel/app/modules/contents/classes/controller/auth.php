@@ -11,7 +11,7 @@ class Controller_Auth extends \Controller_Commonlogin {
     public $callback_url;
     
     public function action_index() {
-       $this->viewContent('auth/top_view', 'ログイン画面');
+       $this->viewWrap('auth/top_view', 'ログイン画面');
     }
     
     public function action_login($_provider) {
