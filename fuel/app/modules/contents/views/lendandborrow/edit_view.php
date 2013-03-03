@@ -145,11 +145,11 @@ function ingicater_end() {
 $(function () {
     //FBの友達リストを取得する
     $('.get_fb_friends').click(function() {
-        ingicater_start();
         if ($("select[name='facebook_friend_id'] option:selected").text() !== "") {
             console.log('既にデータ取得済み');
             return ;
         }
+        ingicater_start();
         $.ajax({
             dataType: 'json',
             url: "<?php echo \Uri::base() . 'contents/rest/lendandborrow/facebook_friends.json';?>",
@@ -175,13 +175,12 @@ $(function () {
     });
     
     //通常の友達リストを取得する
-    $('.get_app_friends').click(function() {
-        ingicater_start();
-        
+    $('.get_app_friends').click(function() {        
         if ($("select[name='get_app_friends'] option:selected").text() !== "") {
             console.log('既にデータ取得済み');
             return ;
         }
+        ingicater_start();
         $.ajax({
             dataType: 'json',
             url: "<?php echo \Uri::base() . 'contents/rest/lendandborrow/app_friends/' . $view_data['user_profile']->id . '/get.json';?>",
