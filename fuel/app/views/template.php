@@ -8,7 +8,6 @@
     <?php echo Asset::css('base.css'); ?>
     <?php //echo Asset::css('content.css'); ?>        
     <?php echo Asset::js('jquery.js'); ?>
-    <?php echo Asset::js('jquery.activity-indicator-1.0.0.min.js'); ?>
 </head>
 <body>
     <?php echo $content; ?>
