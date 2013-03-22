@@ -17,6 +17,8 @@ class Controller_Common extends \Controller_Template {
     protected $user_profile;
     
     protected $user_profile_id;
+    
+    protected $util;
 
         
         
@@ -33,6 +35,7 @@ class Controller_Common extends \Controller_Template {
         
         $this->model_wrap = new Lib_Modelwrap();
 
+        $this->util = new Lib_Util();
         
         $lib_user_profile = new Lib_UserProfile();
         $this->user_profile = $lib_user_profile->create_user_instance($this->model_wrap, $this->user_profile_id, $user_name);
@@ -53,7 +56,7 @@ class Controller_Common extends \Controller_Template {
         //ユーザ本人の情報を取得
         $this->view_data['user_profile'] = $this->user_profile;
         
-        $this->template->content = \View::forge($path,  array('view_data' => $this->view_data, 'title' => $title));
+        $this->template->content = \View::forge($path,  array('view_data' => $this->view_data, 'title' => $title, 'util' => $this->util));
         
     }
 
