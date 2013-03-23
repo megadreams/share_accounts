@@ -6,7 +6,7 @@ class Lib_Util {
 	//	'class' => 'hoge',
 	//	'style' => 'text-align: center; color: #ff0000;"
 	//)
-	public function getLinkTag($link, $content, $properties = array()) {
+	public function get_link_tag($link, $content, $properties = array()) {
 		if ($link === null) {
 			var_dump('NO LINK');
 			exit;
@@ -30,7 +30,7 @@ class Lib_Util {
 		return $a;
 	}
 	
-	public function getImageTag($src, $alt, $properties = array()) {
+	public function get_image_tag($src, $alt, $properties = array()) {
 		if ($src === null) {
 			var_dump('NO SRC');
 			exit;

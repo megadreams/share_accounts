@@ -9,7 +9,7 @@
  * @package  app
  * @extends  Controller
  */
-class Controller_Welcome extends Controller
+class Controller_Welcome extends Controller_Common
 {
 
 	/**
@@ -20,6 +20,7 @@ class Controller_Welcome extends Controller
 	 */
 	public function action_index()
 	{
+//                $data_list = $this->mongo_wrap->get_where('test', array());
 		return Response::forge(View::forge('welcome/index'));
 	}
 
