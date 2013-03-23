@@ -42,6 +42,7 @@ class Controller_Common extends \Controller_Template {
         $this->mongo_wrap = Lib_Mongowrap::getInstance();
         
         $lib_user_profile = new Lib_UserProfile();
+
         $this->user_profile = $lib_user_profile->create_user_instance($this->model_wrap, $this->user_profile_id, $user_name);
         
     }
