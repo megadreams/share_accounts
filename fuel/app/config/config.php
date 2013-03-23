@@ -42,6 +42,7 @@ return array(
             //読み込むconfigの設定
             'config'  => array(
                 'contents' => null,
+                'db' => null
             ),            
     ),
     
