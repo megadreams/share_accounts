@@ -38,11 +38,29 @@ class Lib_Userprofile {
         }
         return $user_profile;
     }
+    
 
     
     //===========================
     //      以下Mongo用
     //===========================
+
+    /**
+     * user_profileからサイト独自のuser_idを取得する
+     * @param type $user_profile_list
+     * mongoからとってきたuser_profile
+     * @return int
+     * id
+     */
+    public function get_user_profile_id($user_profile_list) {
+        foreach ($user_profile_list as $user_profile) {
+            if (array_key_exists('user_id', $user_profile)) {
+                return intval($user_profile['user_id']);
+            }
+        }
+        
+        return 0;
+    }
     
     /**
      * Mongoにユーザー情報を保存する
