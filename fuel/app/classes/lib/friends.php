@@ -14,5 +14,5 @@ class Lib_Friends{
         $user_friend = file_get_contents('https://graph.facebook.com/me/friends?locale=ja&' . $access_token);
         $user_friend_list = json_decode($user_friend);
         return $user_friend_list;
-    }  
+    } 
 }
