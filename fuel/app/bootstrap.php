@@ -48,7 +48,5 @@ if ( file_exists(DOCROOT.'/../.production') || file_exists(DOCROOT.'/.production
 	define('ENVIRONMENT', ENVIRONMENT_DEVELOPMENT);	
 	define('BASE_URL', 'http://localhost/share_accounts/public/');	
 }
-   
-
 // Initialize the framework with the config file.
 Fuel::init('config.php');

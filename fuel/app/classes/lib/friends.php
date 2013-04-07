@@ -6,6 +6,7 @@ class Lib_Friends{
     public function get_facebook_friend() {
         $access_token = \Session::get('access_token');
 
+        
         //アクセストークンが無ければ認証画面へ
         if ($access_token === null) {
             \Response::redirect('contents/auth/index');
@@ -15,4 +16,5 @@ class Lib_Friends{
         $user_friend_list = json_decode($user_friend);
         return $user_friend_list;
     } 
+    
 }

@@ -6,16 +6,13 @@
  */
 
 return array(
-	'default' => array(
-                'type'			=> 'mysql',
-                'connection'	=> array(
-                        'hostname'		=> 'localhost',
-                        'port'			=> '3306',
-                        'database'		=> 'share_accounts',
-                        'username'		=> 'share_accounts',
-                        'password'		=> 'share_accounts',
-                ),
-                // 		'table_prefix' => 'ls_',
-                'profiling' => true
-        )
+    'mongo' => array(
+        'default' => array(
+            'hostname'   => '127.0.0.1',
+            'port' => 27017,
+            'database'   => 'share',
+            'username'   => 'share',
+            'password'   => 'sharepass',
+        ),
+    ),    
 );
