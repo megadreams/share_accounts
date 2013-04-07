@@ -28,4 +28,11 @@ return array(
       'CALLBACK' => 'contents/auth/callback/',
     ),
     
+    //mongoに入れるOAuthのid
+    'user_profile_keys' => array(
+        'user_facebook_id',
+        'user_line_id',
+        'user_twitter_id'
+    )
+    
 );
