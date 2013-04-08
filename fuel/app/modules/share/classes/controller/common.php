@@ -14,8 +14,10 @@ class Controller_Common extends \Controller_Template {
 
     protected $view_data;
     
-    protected $user_profile;
-        
+    protected $lib_userprofile;
+    
+    protected $lib_lendandborrow;
+    
     protected $util;
     
     protected $mongo_wrap;
@@ -26,7 +28,6 @@ class Controller_Common extends \Controller_Template {
         //親クラスのbeforeを呼び出して, $this->templateを使えるようにしてもらう
         $this->template = "share_template";
         parent::before();
-        //ログインしているかのチェック
 /*
         $this->user_profile_id = \Session::get('user_profile_id');
         if ($this->user_profile_id === null) {
@@ -39,9 +40,11 @@ class Controller_Common extends \Controller_Template {
         $this->mongo_wrap = \Lib_Mongowrap::getInstance();
         $this->rest_url_list = \Config::get('rest_list');
         
-        $this->user_profile = new \StdClass();
-        $this->user_profile->id = 1;
-        $this->user_profile->name = "めがりょう";
+        $this->lib_userprofile = new Lib_Userprofile($this->mongo_wrap);
+        $this->view_data['user_profile'] =  $this->lib_userprofile->get_user_profile($user_profile_id);
+        
+        
+        $this->lib_lendandborrow = new Lib_Lendandborrow($this->mongo_wrap);
     }
 
 
@@ -52,9 +55,7 @@ class Controller_Common extends \Controller_Template {
         return $response;
     }
     
-    protected function viewWrap($path = null, $title = '貸し借り管理') {        
-        //ユーザ本人の情報を取得
-        $this->view_data['user_profile'] = $this->user_profile;
+    public function viewWrap($path = null, $title = '貸し借り管理') {        
         $this->template->content = \View::forge($path,  array('view_data' => $this->view_data, 'title' => $title));
         
     }

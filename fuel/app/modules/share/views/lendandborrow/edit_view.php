@@ -4,7 +4,7 @@
     </div>
     <header class="header">
         <h1 id="contents_title">
-            <?php echo $view_data['user_profile']->name; ?>さんが，借りているリスト
+            <?php echo $view_data['user_profile']['user_name']; ?>さんが，借りているリスト
         </h1>        
     </header>
     <section>
@@ -14,7 +14,7 @@
             <tr>
                 <th>日付</th>
                 <td>
-                    <input type="text" class="regist" name="date" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? date('Ymd', strtotime($view_data['lend_and_borrow_mst']->date)):'';?>">
+                    <input type="text" class="regist" name="date" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? date('Ymd', strtotime($view_data['lend_and_borrow_mst']['date'])):'';?>">
                 </td>
             </tr>
             <tr>
@@ -35,7 +35,7 @@
                 <!-- カテゴリーによってここを変えたい -->
                 <th>金額</th>
                 <td>
-                    <input type="text" class="regist" name="item" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? $view_data['lend_and_borrow_mst']->item:'';?>">
+                    <input type="text" class="regist" name="item" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? $view_data['lend_and_borrow_mst']['item']:'';?>">
                 </td>
             </tr>
             <tr>
@@ -44,7 +44,7 @@
                     <select class="regist" name="status">
                         <?php $status_list = \Config::get('status'); ?>
                         <?php foreach($status_list[$view_data['type']] as $id =>$status):?>
-                            <?php if (isset($view_data['lend_and_borrow_mst']) && $view_data['lend_and_borrow_mst']->status == $id): ?>
+                            <?php if (isset($view_data['lend_and_borrow_mst']) && $view_data['lend_and_borrow_mst']['status'] == $id): ?>
                                 <option value="<?php echo $id;?>" selected><?php echo $status;?></option>
                             <?php else:?>
                                 <option value="<?php echo $id;?>"><?php echo $status;?></option>
@@ -56,22 +56,22 @@
             <tr>
                 <th>メモ</th>
                 <td>
-                    <input type="text" class="regist" name="memo" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? $view_data['lend_and_borrow_mst']->memo:'';?>">
+                    <input type="text" class="regist" name="memo" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? $view_data['lend_and_borrow_mst']['memo']:'';?>">
                 </td>
             </tr>  
             <tr>
                 <th>返却期限</th>
                 <td>
-                    <input type="text" class="regist" name="limit" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? $view_data['lend_and_borrow_mst']->limit:'';?>">
+                    <input type="text" class="regist" name="limit" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? $view_data['lend_and_borrow_mst']['limit']:'';?>">
                 </td>
             </tr>            
             </tbody>
         </table>
         <?php if (isset($view_data['lend_and_borrow_mst']) === true): ?>
-            <input class="regist" type="hidden" name="lend_and_borrow_mst_id" value="<?php echo $view_data['lend_and_borrow_mst']->id;?>">
+            <input class="regist" type="hidden" name="lend_and_borrow_mst_id" value="<?php echo $view_data['lend_and_borrow_mst']['collection_id'];?>">
         <?php endif; ?>
 
-        <input class="regist" type="hidden" name="<?php echo ($view_data['type'] === \Config::get('TYPE_LEND'))? 'from_user_id': 'to_user_id'?>" value=<?php echo $view_data['user_profile']->id; ?>>
+        <input class="regist" type="hidden" name="<?php echo ($view_data['type'] === \Config::get('TYPE_LEND'))? 'borrow_user_id': 'to_user_id'?>" value=<?php echo $view_data['user_profile']['user_id']; ?>>
         <input class="regist" type="hidden" name="type" value="<?php echo $view_data['type']; ?>">
         <input class="add_btn" type="button" value="登録">
     </form>
@@ -113,7 +113,7 @@ $(function () {
         ingicater_start();
         $.ajax({
             dataType: 'json',
-            url: "<?php echo \Uri::base() . 'contents/rest/lendandborrow/facebook_friends.json';?>",
+            url: "<?php echo \Uri::base() . 'share/rest/lendandborrow/facebook_friends.json';?>",
             success: function(data) {
                 console.log(data['data']);
                 var selectElem = document.createElement('select');
@@ -144,7 +144,7 @@ $(function () {
         ingicater_start();
         $.ajax({
             dataType: 'json',
-            url: "<?php echo \Uri::base() . 'contents/rest/lendandborrow/app_friends/' . $view_data['user_profile']->id . '/get.json';?>",
+            url: "<?php echo \Uri::base() . 'contents/rest/lendandborrow/app_friends/' . $view_data['user_profile']['user_id'] . '/get.json';?>",
             success: function(data) {
                 console.log(data['data']);
                 var selectElem = document.createElement('select');
@@ -184,7 +184,7 @@ $(function () {
         
         $.ajax({
             dataType: 'json',
-            url: "<?php echo \Uri::base() . 'share/rest/share/regist';?>",
+            url: "<?php echo \Uri::base() . 'share/rest/lendandborrow/regist';?>",
             type: "post",
             data: postData,
             success: function(data) {

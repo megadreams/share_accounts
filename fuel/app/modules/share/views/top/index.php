@@ -1,6 +1,6 @@
 
     <div>
-        <?php echo $view_data['user_profile']->name;?>さんこんにちは　　
+        <?php echo $view_data['user_profile']['user_name'];?>さんこんにちは　　
         <a href="<?php echo \Uri::base() . 'share/auth/logout/';?>">ログアウト</a>
     </div>
     <header class="header">

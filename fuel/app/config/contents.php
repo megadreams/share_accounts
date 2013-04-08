@@ -41,6 +41,11 @@ return array(
         'user_twitter_id'
     ),
     
+    //mongoに入れるlend_and_borrowのkey
+    'lend_and_borrow_keys' => array(
+        
+    ),
+    
     //RestURL系
     'rest_list' => array(
         'lendandborrow'      => 'share/rest/share/share_list/',
