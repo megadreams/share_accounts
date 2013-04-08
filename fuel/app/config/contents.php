@@ -33,6 +33,14 @@ return array(
         'user_facebook_id',
         'user_line_id',
         'user_twitter_id'
-    )
+    ),
+    
+    //RestURL系
+    'rest_list' => array(
+        'lendandborrow'      => 'share/rest/share/share_list/',
+        'edit_lendandborrow' => 'share/rest/share/share_info/',
+        'friends'            => 'share/rest/share/friends/',
+        
+    ),
     
 );

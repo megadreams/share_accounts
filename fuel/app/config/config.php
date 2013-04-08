@@ -35,8 +35,8 @@ return array(
              * 
              */
             'packages'  => array(
-                'orm',
-                'auth',
+//                'orm',
+//                'auth',
 //                'opauth',
             ),
             //読み込むconfigの設定
@@ -45,5 +45,6 @@ return array(
                 'db' => null
             ),            
     ),
+ 
     
 );
