@@ -1,5 +1,5 @@
 <?php
-namespace Facebook;
+//namespace Facebook;
 /**
  * Copyright 2011 Facebook, Inc.
  *
@@ -28,7 +28,7 @@ if (!function_exists('json_decode')) {
  *
  * @author Naitik Shah <naitik@facebook.com>
  */
-class FacebookApiException extends Exception
+class FacebookApiException extends \Exception
 {
   /**
    * The result from the API server that represents the exception information.

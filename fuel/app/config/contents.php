@@ -28,6 +28,12 @@ return array(
       'CALLBACK' => 'contents/auth/callback/',
     ),
     
+    //Twitter
+    'twitter' => array(
+        'CONSUMER_KEY' => 'XyOv9DT8WzcwwAeC0pUGA',
+        'CONSUMER_SECRET' => 'HDwTsKWxF0YTLOBrBpLwQTjJPKRFEJ1DJ90VcfRD1s'
+    ),
+    
     //mongoに入れるOAuthのid
     'user_profile_keys' => array(
         'user_facebook_id',
