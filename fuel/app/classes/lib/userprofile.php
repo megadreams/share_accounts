@@ -2,6 +2,7 @@
 
 class Lib_Userprofile {
 
+    
     public function create_user_instance($model_wrap, $user_id = null, $user_name = null) {
         $user_profile = new stdClass();
         $user_profile->id = $user_id;
