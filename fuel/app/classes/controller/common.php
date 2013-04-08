@@ -21,6 +21,11 @@ class Controller_Common extends \Controller_Template {
     protected $util;
     
     protected $mongo_wrap;
+    
+    
+    //facebook, Twitter, LINEのいずれかでログインするときにつかう
+    protected $strategy;
+    protected $social;
 
         
         
