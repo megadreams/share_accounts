@@ -4,13 +4,14 @@ interface Lib_Strategy_Interface {
     public function get_user_profile_list($user_platform_id);
     public function get_friend();
     public function start_oauth();
+    public function callback($verifier);
 }
 
 class Lib_Strategy {
     
     protected $mongo_wrap;
     
-    public function __construce() {
+    public function __construct() {
         $this->mongo_wrap = Lib_Mongowrap::getInstance();
     }
     
@@ -23,6 +24,10 @@ class Lib_Strategy {
     }
     
     public function start_oauth() {
+        return null;
+    }
+    
+    public function callback($verifier) {
         return null;
     }
 }

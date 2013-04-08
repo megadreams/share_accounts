@@ -9,6 +9,30 @@ namespace Contents;
 class Controller_Honda extends \Controller_Common {
     
     public function action_index() {
+//        $strategy = new \Lib_Fb_Strategy();
+//        $ret = $strategy->start_oauth();
+//        if ($ret !== null) {
+//            //それぞれのPFにログインする処理
+//            \Response::redirect($ret);
+//        }
+//        
+//        $friend_list = $strategy->get_friend();
+//        var_dump($friend_list);
+        
+        
+        $strategy = new \Lib_Tw_Strategy();
+        $ret = $strategy->start_oauth();
+        if ($ret !== null) {
+            //それぞれのPFにログインする処理
+            \Response::redirect($ret);
+        }
+        $friend_list = $strategy->get_friend();
+        var_dump($friend_list);
+        exit;
+        
+        
+        
+        
         $lib_user_profile = new \Lib_Userprofile();
         
         //user_profileの追加
