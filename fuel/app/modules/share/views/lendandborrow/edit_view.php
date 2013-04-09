@@ -80,7 +80,7 @@
             <tr>
                 <th>返却期限</th>
                 <td>
-                    <input class="lib_date" type="text" class="regist" name="limit" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? $view_data['lend_and_borrow_mst']['limit']:'';?>">
+                    <input class="lib_date regist" type="text" name="limit" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? $view_data['lend_and_borrow_mst']['limit']:'';?>">
                 </td>
             </tr>            
             </tbody>
