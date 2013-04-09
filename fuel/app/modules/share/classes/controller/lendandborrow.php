@@ -15,10 +15,26 @@ class Controller_Lendandborrow extends Controller_Common {
     public function action_top($type) {
         
         //貸し借り情報の取得
-        $this->view_data['lend_and_borrow_list'] = $this->lib_lendandborrow->get_lendandborrow_list($type, $this->lib_userprofile->user_id);
+        $lend_and_borrow_list = $this->lib_lendandborrow->get_lendandborrow_list($type, $this->lib_userprofile->user_id);
+        if ($type === \Config::get('TYPE_LEND')) {
+            $target_collum = 'borrow_user_id';
+        } else {
+            $target_collum = 'lend_user_id';            
+        }
+        //ユーザ別のリストを取得する
+        $user_lend_and_borrows = array();
+        foreach($lend_and_borrow_list as $data) {
+            $data_user_id = (int)$data[$target_collum];
+            if (isset($user_lend_and_borrows[$data_user_id]) === false) {            
+                $user_lend_and_borrows[$data_user_id] = array();
+            }
+            $user_lend_and_borrows[$data_user_id][]  = (int)$data['item'];            
+        }
+        $this->view_data['user_lend_and_borrows'] = $user_lend_and_borrows;
+        
         
         //ユーザの友達情報を取得する
-       	$this->view_data['user_friends'] = $this->lib_userprofile->get_friends();
+       	$this->view_data['user_friends'] = $this->lib_userprofile->get_user_friends();
 
         
         if ($type === \Config::get('TYPE_LEND')) {
@@ -37,10 +53,9 @@ class Controller_Lendandborrow extends Controller_Common {
      * 
      */
     public function action_edit_data($type, $lend_and_borrow_id = null) {
-
+        
         //ユーザの友達情報を取得する
-       	$this->view_data['user_friends'] = $this->lib_userprofile->get_friends();
-
+       	$this->view_data['user_friends'] = $this->lib_userprofile->get_user_friends();
         
         if ($lend_and_borrow_id !== null) {
             //編集の場合情報を取得

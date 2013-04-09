@@ -8,29 +8,7 @@ m10{ margin:10px;}
 m15{ margin:15px;}
 m20{ margin:20px;}
 
-/*Bodyの設定*/
-/*
-body {
-    width:95%;
-    height:95%;
-    overflow:hidden;
-    margin:0px auto;  
-    padding:0px;
-    background-color: white;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, transparent), color-stop(.5, rgba(200, 0, 0, .5)), to(rgba(200, 0, 0, .5))), -webkit-gradient(linear, 0 0, 100% 0, color-stop(.5, transparent), color-stop(.5, rgba(200, 0, 0, .5)), to(rgba(200, 0, 0, .5)));
-    background-image: -webkit-linear-gradient(transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5)), -webkit-linear-gradient(0deg, transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5));
-    background-image: -moz-linear-gradient(transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5)), -moz-linear-gradient(0deg, transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5));
-    background-image: -ms-linear-gradient(transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5)), -ms-linear-gradient(0deg, transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5));
-    background-image: -o-linear-gradient(transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5)), -o-linear-gradient(0deg, transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5));
-    background-image: linear-gradient(transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5)), linear-gradient(0deg, transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5));
-    background-size: 100% 10%, 10% 100px;
 
-    background-color: #ffecd0;
-    background-image: -webkit-linear-gradient(0deg, transparent 50%, white 50%), -webkit-linear-gradient(45deg, rgba(255, 255, 255, .3) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .3) 50%, rgba(255, 255, 255, .3) 75%, transparent 75%, transparent);
-    background-size: 200% 100%, 100px 100px;
-
-}
-*/
 /*コンテンツの設定*/
 .container-fluid{
     padding:0px;
@@ -42,34 +20,10 @@ body {
     margin:0px;
 }
 
-/*トップページのアイコン*/
-.iconsize {
-    width:88px;
-    height:88px;
-    margin:0px auto;
-    border:1px solid black;
-    border-radius:10px;
-    box-shadow:2px 2px 2px #808080;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.00, #fee4c8), color-stop(0.98, #ff7400));
-    background: -webkit-linear-gradient(top, #fee4c8 0%, #ff7400 98%);
-    background: -moz-linear-gradient(top, #fee4c8 0%, #ff7400 98%);
-    background: -o-linear-gradient(top, #fee4c8 0%, #ff7400 98%);
-    background: -ms-linear-gradient(top, #fee4c8 0%, #ff7400 98%);
-    background: linear-gradient(to bottom, #fee4c8 0%, #ff7400 98%);
-
-    
-}
-.iconsize:hover {
-    background:rgba(180,180,180,0.5);
-}
 .row {
     margin:5px 0px;
 }
 
-.lend {
-    color:blue;
-    font-size:150%;
-}
 
 /*ヘッダー部分*/
 .header {
@@ -88,42 +42,7 @@ footer {
     padding-right:10px;
 }
 
-/*トップページ*/
-.category {
-    background:url('../img/contents/fusen/big002.png');
-    background-repeat: no-repeat;
-    display:block;
-    width:150px;
-    height:150px;
-    background-size:100%;
-    margin:0px auto;
-    position:relative;
-}
 
-.category_pin {
-    position: absolute;
-    left: 60px;
-    top: -10px;
-}
-
-.category_name {
-    position: absolute;
-    left: 30px;
-    top: 60px;
-    font-size: 150%;
-}
-
-
-/*貸した，借りたリストの表示欄*/
-.list {
-    border:1px solid black;
-    border-radius:10px;
-    box-shadow:2px 2px 2px #808080;
-    background:rgba(240, 240, 240, 0.8);
-    width:300px;
-    margin:5px auto;
-    display:block
-}
 
 /*編集エリア*/
 .edit_area {
@@ -164,11 +83,13 @@ footer {
     display: none;
 }
 
-
-/*登録ボタン*/
 input[type="button"] {
     width:150px;
     height:44px;
+}
+
+/*登録ボタン*/
+.add_btn {
     color:white;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0.00, #2476ff), color-stop(1.00, #001ca8));
     background: -webkit-linear-gradient(#2476ff, #001ca8);
@@ -177,7 +98,7 @@ input[type="button"] {
     background: -ms-linear-gradient(#2476ff, #001ca8);
     background: linear-gradient(#2476ff, #001ca8);
 }
-input[type="button"]:hover {
+.add_btn:hover {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0.00, #b4ddfe), color-stop(1.00, #0d4996));
     background: -webkit-linear-gradient(#b4ddfe, #0d4996);
     background: -moz-linear-gradient(#b4ddfe, #0d4996);
@@ -186,5 +107,4 @@ input[type="button"]:hover {
     background: linear-gradient(#b4ddfe, #0d4996);
 
 }
-
 

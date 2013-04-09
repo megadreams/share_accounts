@@ -36,11 +36,12 @@ class Lib_Lendandborrow {
         $data = $this->mongo_wrap->get_where('lend_and_borrow',
                 array($target_colum => (int)$user_id)
             );
+        
         return $data;
     }
     
 
-    public function get_lendandborrow_mst($collection_id) {        
+    public function get_lendandborrow_mst($collection_id) {
         $data = $this->mongo_wrap->where(array('collection_id' => (int)$collection_id))->get_one('lend_and_borrow');
         return $data;
     }

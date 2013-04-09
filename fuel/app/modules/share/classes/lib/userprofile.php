@@ -16,9 +16,17 @@ class Lib_Userprofile {
         $user_profile = $this->mongo_wrap->where(array('user_id' => (int)$user_id))->get_one('user_profile');
         return $user_profile;
     }
+
     
-    public function get_friends() {
-        return $this->mongo_wrap->get_where('user_friends', array('user_id' => (int)$this->user_id));
+    public function get_user_friends() {
+        $frind_list = $this->mongo_wrap->get_where('user_friends', array('user_id' => (int)$this->user_id));
+        $user_frinend_ids = array();
+        foreach ($frind_list as $friend) {
+            $user_frinend_ids[] = $friend['frined_user_id'];    
+        }
+        
+        return $this->mongo_wrap->where_in('user_id', $user_frinend_ids)->get('user_profile');
+        
     }
 }
 
