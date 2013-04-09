@@ -46,12 +46,11 @@ class Lib_Tw_Strategy extends Lib_Strategy implements Lib_Strategy_Interface {
         $access_token = $to->getAccessToken($verifier);
         \Session::set('access_token', $access_token['oauth_token']);
         \Session::set('access_token_secret', $access_token['oauth_token_secret']);
-        \Session::set('user_id', $access_token['user_id']);
-        \Session::set('screen_name', $access_token['screen_name']);
+//        \Session::set('user_id', $access_token['user_id']);
+//        \Session::set('screen_name', $access_token['screen_name']);
         
-        //====
-        //user_idとshareのuser_idを変換する処理をここに入れる
-        //====
+        //opensocail_user_idの保存
+        \Session::set('opensocail_user_id', $access_token['user_id']);
         
         
         //============================
