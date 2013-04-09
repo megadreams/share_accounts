@@ -12,8 +12,11 @@ class Controller_Oauth extends \Controller_Common {
         }
         $strategy_name = 'Lib_' . $pf . '_Strategy';
         $strategy = new $strategy_name();
-        var_dump($strategy);
-        $verifier = $_GET['oauth_verifier'];
+        //Twitterで使う
+        $verifier = null;
+        if (isset($_GET['oauth_verifier']) === true) {
+            $verifier = $_GET['oauth_verifier'];
+        }
         $strategy->callback($verifier);
     }
 }

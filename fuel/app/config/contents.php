@@ -34,11 +34,11 @@ return array(
         'CONSUMER_SECRET' => 'HDwTsKWxF0YTLOBrBpLwQTjJPKRFEJ1DJ90VcfRD1s'
     ),
     
-    //mongoに入れるOAuthのid
-    'user_profile_keys' => array(
-        'user_facebook_id',
-        'user_line_id',
-        'user_twitter_id'
+    //Mongoのuser_profileのそれぞれのPFのopensocial_user_idとそのPFを対応させたもの
+    'user_profile_platform_keys' => array(
+        'fb' => 'user_facebook_id',
+        'ln' => 'user_line_id',
+        'tw' => 'user_twitter_id'
     )
     
 );

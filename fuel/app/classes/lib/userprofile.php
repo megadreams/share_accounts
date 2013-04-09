@@ -109,7 +109,7 @@ class Lib_Userprofile {
     private function set_user_profile_data($user_array) {
         $ret = array();
 
-        $key_list = \Config::get('user_profile_keys');
+        $key_list = \Config::get('user_profile_platform_keys');
 
         foreach ($key_list as $key) {
             if (isset($user_array[$key]) !== true) {
@@ -144,6 +144,66 @@ class Lib_Userprofile {
         
         $update_user_data['updated_at'] = strtotime('now');
         $mongo_wrap->where($where_key)->update('user_profile', $update_user_data);
+    }
+    
+    
+    /**
+     * opensocail_user_idからuser_profileのデータを取得する
+     * @param type $opensocial_user_id
+     * @param type $platform 'fb', 'tw', 'ln'
+     * @return $user_data: Mongoから取得したレコード
+     */
+    public function get_user_profile_data($opensocial_user_id, $platform) {
+        if ($opensocial_user_id === null) {
+            \Log::debug('$opensocial_user_id is empty');
+            return array();
+        }
+        if ($platform === null) {
+            \Log::debug('$platform is empty');
+            return array();
+        }
+        
+        $user_get_where_key = array();
+        $key_list = \Config::get('user_profile_platform_keys');
+        
+        foreach ($key_list as $key => $val) {
+            if ($platform === $key) {
+                $user_get_where_key[$val] = '' . $opensocial_user_id;
+                break;
+            }
+        }
+//        この部分は↑で代用
+//        if ($platform === 'fb') {
+//            $user_get_where_key['user_facebook_id'] = '' . $opensocial_user_id;
+//        } else if ($platform === 'tw') {
+//            $user_get_where_key['user_twitter_id'] = '' . $opensocial_user_id;
+//        } else if ($platform === 'ln') {
+//            $user_get_where_key['user_line_id'] = '' . $opensocial_user_id;
+//        }
+        
+        $mongo_wrap = Lib_Mongowrap::getInstance();
+        return $mongo_wrap->get_where('user_profile', $user_get_where_key);
+    }
+    
+    public function get_opensocial_user_id() {
+        $opensocial_user_id = Session::get('opensocail_user_id');
+        return $opensocial_user_id;
+    }
+    
+    public function is_share_user() {
+        $mongo_wrap = Lib_Mongowrap::getInstance();
+        $key_list = \Config::get('user_profile_platform_keys');
+        $or_where_key = array();
+
+        foreach ($key_list as $key => $val) {
+            $or_where_key[] = array($val => Session::get('opensocail_user_id'));
+        }
+        
+        $user_data = $mongo_wrap->or_where($or_where_key)->get('user_profile');
+        if (count($user_data) > 0) {
+            return true;
+        }
+        return false;
     }
 
 }

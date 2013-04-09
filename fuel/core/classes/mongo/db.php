@@ -321,10 +321,12 @@ class Mongo_Db
 			{
 				$this->wheres['$or'] = array();
 			}
-
+                        $cnt = 0;
 			foreach ($wheres as $wh => $val)
 			{
-				$this->wheres['$or'][] = array($wh => $val);
+//				$this->wheres['$or'][$cnt] = array($wh => $val);
+				$this->wheres['$or'][$cnt] = $val;
+                                $cnt++;
 			}
 		}
 		return $this;
