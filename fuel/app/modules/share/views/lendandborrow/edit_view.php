@@ -4,7 +4,7 @@
     </div>
     <header class="header">
         <h1 id="contents_title">
-            <?php echo $view_data['user_profile']->name; ?>さんが，借りているリスト
+            <?php echo $view_data['user_profile']['user_name']; ?>さんが，借りているリスト
         </h1>        
     </header>
     <section>
@@ -14,7 +14,7 @@
             <tr>
                 <th>日付</th>
                 <td>
-                    <input type="text" class="regist" name="date" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? date('Ymd', strtotime($view_data['lend_and_borrow_mst']->date)):'';?>">
+                    <input type="text" class="regist lib_date" name="date" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? date('Ymd', strtotime($view_data['lend_and_borrow_mst']['date'])):'';?>">
                 </td>
             </tr>
             <tr>
@@ -24,27 +24,45 @@
                 <td>
                     <div>
                         <div class="user_select">
-                        
+                            <?php if (count($view_data['user_friends']) > 0):?>
+                                <select class="regist select" name="<?php echo ($view_data['type'] === \Config::get('TYPE_LEND'))? 'borrow_user_id': 'lend_user_id'?>">
+                                <?php foreach ($view_data['user_friends'] as $user_friends) :?>
+                                    <option value=<?php echo $user_friends['user_id'];?>><?php echo $user_friends['user_name'];?></option>
+                                <?php endforeach;?>
+                                </select>
+                            <?php else:?>
+                                現在友達は登録されていません
+                            <?php endif;?>
+                        </div>
+                        <div>
+                            <a data-toggle="modal" href="#myModal" class="btn btn-primary">友達を探す</a>
                         </div>
                     </div>
                 </td>
             </tr>
             <tr>
-
+            <tr>
+                <th>カテゴリ</th>
+                <td>
+                    <select class="regist select" name="category">
+                        <option value="money">お金</option>
+                    </select>
+                </td>
+            </tr>
             <tr>
                 <!-- カテゴリーによってここを変えたい -->
                 <th>金額</th>
                 <td>
-                    <input type="text" class="regist" name="item" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? $view_data['lend_and_borrow_mst']->item:'';?>">
+                    <input type="text" class="regist" name="item" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? $view_data['lend_and_borrow_mst']['item']:'';?>">
                 </td>
             </tr>
             <tr>
                 <th>ステータス</th>
                 <td>
-                    <select class="regist" name="status">
+                    <select class="regist select" name="status">
                         <?php $status_list = \Config::get('status'); ?>
                         <?php foreach($status_list[$view_data['type']] as $id =>$status):?>
-                            <?php if (isset($view_data['lend_and_borrow_mst']) && $view_data['lend_and_borrow_mst']->status == $id): ?>
+                            <?php if (isset($view_data['lend_and_borrow_mst']) && $view_data['lend_and_borrow_mst']['status'] == $id): ?>
                                 <option value="<?php echo $id;?>" selected><?php echo $status;?></option>
                             <?php else:?>
                                 <option value="<?php echo $id;?>"><?php echo $status;?></option>
@@ -56,26 +74,48 @@
             <tr>
                 <th>メモ</th>
                 <td>
-                    <input type="text" class="regist" name="memo" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? $view_data['lend_and_borrow_mst']->memo:'';?>">
+                    <input type="text" class="regist" name="memo" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? $view_data['lend_and_borrow_mst']['memo']:'';?>">
                 </td>
             </tr>  
             <tr>
                 <th>返却期限</th>
                 <td>
-                    <input type="text" class="regist" name="limit" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? $view_data['lend_and_borrow_mst']->limit:'';?>">
+                    <input class="lib_date" type="text" class="regist" name="limit" value="<?php echo (isset($view_data['lend_and_borrow_mst']))? $view_data['lend_and_borrow_mst']['limit']:'';?>">
                 </td>
             </tr>            
             </tbody>
         </table>
+        <input class="regist" type="hidden" name="<?php echo ($view_data['type'] === \Config::get('TYPE_LEND'))? 'lend_user_id': 'borrow_user_id'?>" value=<?php echo $view_data['user_profile']['user_id']; ?>>
+        <input class="add_btn" type="button" value="登録">
         <?php if (isset($view_data['lend_and_borrow_mst']) === true): ?>
-            <input class="regist" type="hidden" name="lend_and_borrow_mst_id" value="<?php echo $view_data['lend_and_borrow_mst']->id;?>">
+            <input class="regist" type="hidden" name="collection_id" value="<?php echo $view_data['lend_and_borrow_mst']['collection_id'];?>">
+            <input class="delete_btn btn-danger" type="button" value="削除">
         <?php endif; ?>
 
-        <input class="regist" type="hidden" name="<?php echo ($view_data['type'] === \Config::get('TYPE_LEND'))? 'from_user_id': 'to_user_id'?>" value=<?php echo $view_data['user_profile']->id; ?>>
-        <input class="regist" type="hidden" name="type" value="<?php echo $view_data['type']; ?>">
-        <input class="add_btn" type="button" value="登録">
     </form>
 </section>
+
+<!-- モーダルビュー -->
+ <!-- sample modal content -->
+<div id="myModal" class="modal hide fade">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal" >&times;</a>
+    <h3>他のアプリから友だちを探す</h3>
+  </div>
+  <div class="modal-body">
+    <h4>Facebook</h4>
+    <p>Facebookから友達リストを取得します</p>
+
+    <h4>Twitter</h4>
+    <p>Twitterから友達リストを取得します</p>
+
+    <h4>LINE</h4>
+    <p>LINEから友達リストを取得します</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal" >閉じる</a>
+  </div>
+</div>
 
 <!-- 検索中のマーク -->
 <div id="popup_white">
@@ -86,119 +126,60 @@
     
     
 <script>
-    
-function error_fnc(msg) {
-    alert('サーバでエラーが起きています');
-    console.log(msg);
-    ingicater_end();
-    return ;
-}
-
-function ingicater_start() {
-    $('#popup_white').show();
-    $('#loading_gif').show();    
-}
-function ingicater_end() {
-    $('#popup_white').hide();
-    $('#loading_gif').hide();    
-}
-
 $(function () {
-    //FBの友達リストを取得する
-    $('.get_fb_friends').click(function() {
-        if ($("select[name='facebook_friend_id'] option:selected").text() !== "") {
-            console.log('既にデータ取得済み');
-            return ;
-        }
-        ingicater_start();
-        $.ajax({
-            dataType: 'json',
-            url: "<?php echo \Uri::base() . 'contents/rest/lendandborrow/facebook_friends.json';?>",
-            success: function(data) {
-                console.log(data['data']);
-                var selectElem = document.createElement('select');
-                selectElem.name      = 'facebook_friend_id';
-                selectElem.className = 'regist';
-                
-                $.each(data['data'], function(i){
-                    var optionElem = document.createElement('option');
-                    optionElem.value = data['data'][i]['id'];
-                    optionElem.text = data['data'][i]['name'];
-                    selectElem.appendChild(optionElem); 
-                });
-                console.log(selectElem);
-                $('.user_select').empty();
-                $('.user_select').append(selectElem);
-               ingicater_end();
-            },
-            error: error_fnc
-        });        
+    $('.delete_btn').click(function() {
+        var collectionId = $("input[name='collection_id']")[0].val;
+        var sendData = {'collection_id': collectionId};
+        console.log(sendData);
+        if (!confirm('削除しますか？')) return false;        
+        var sendUrl     = "<?php echo \Uri::base() . 'share/rest/lendandborrow/delete/'?>";
+        var callBackUrl = "<?php echo \Uri::base() . 'share/lendandborrow/top/' . $view_data['type']?>";
+        var result = regist(sendUrl, 'post', sendData, '削除しました', callBackUrl);
+         
     });
-    
-    //通常の友達リストを取得する
-    $('.get_app_friends').click(function() {        
-        if ($("select[name='get_app_friends'] option:selected").text() !== "") {
-            console.log('既にデータ取得済み');
-            return ;
-        }
-        ingicater_start();
-        $.ajax({
-            dataType: 'json',
-            url: "<?php echo \Uri::base() . 'contents/rest/lendandborrow/app_friends/' . $view_data['user_profile']->id . '/get.json';?>",
-            success: function(data) {
-                console.log(data['data']);
-                var selectElem = document.createElement('select');
-                selectElem.name      = '<?php echo ($view_data['type'] === \Config::get('TYPE_LEND'))? 'to_user_id': 'from_user_id'?>';
-                selectElem.className = 'regist';
-                
-                $.each(data['data'], function(i){
-                    var optionElem = document.createElement('option');
-                    optionElem.value = data['data'][i]['id'];
-                    optionElem.text = data['data'][i]['user_name'];
-                    selectElem.appendChild(optionElem); 
-                });
-                console.log(selectElem);
-                $('.user_select').empty();
-                $('.user_select').append(selectElem);
-               ingicater_end();                
-            },
-            error: error_fnc
-        });        
-    });
-
-
-
-
     
     $('.add_btn').click(function() {
-        
-        var postData = {};
-        $.each($('.regist'), function () {
-            postData[this.name] = this.value;
-        });
-        if (postData['facebook_friend_id']) {
-            postData['facebook_friend_name'] = $("select[name='facebook_friend_id'] option:selected").text();
-        }
-        console.log(postData);
+
+        //classからsendDataを取得する
+        var sendData = getSendData();
+        console.log(sendData);
         if (!confirm('登録しますか？')) return false;
         
-        $.ajax({
-            dataType: 'json',
-            url: "<?php echo \Uri::base() . 'share/rest/share/regist';?>",
-            type: "post",
-            data: postData,
-            success: function(data) {
-                console.log(data['data']);
-                if (data['error'] === false) {
-                    alert('登録しました');
-                    location.href = "<?php echo \Uri::base() . 'share/lendandborrow/top/' . $view_data['type']; ?>";
-                } else {
-                    alert('登録できませんでした');
-                }
-            },
-            error: error_fnc
-
-        });       
+        var sendUrl     = "<?php echo \Uri::base() . 'share/rest/lendandborrow/regist/'?>";
+        var callBackUrl = "<?php echo \Uri::base() . 'share/lendandborrow/top/' . $view_data['type']?>";
+        var result = regist(sendUrl, 'post', sendData, '登録しました', callBackUrl);
+        
+        if (result === true || result === false){
+            //何もしない？
+        } else {
+            console.log(result);
+        }
+     });
+    $('.lib_date').scroller({
+        preset: 'date',
+        theme: 'ios',
+        display: 'modal',
+        mode: 'scroller',
+        setText:'OK',
+        cancelText:'キャンセル',
+        dateFormat:'yyyy/mm/dd',
+        dateOrder:'yyyymmdd',
+        endYear:2020,
+        startYear:2000,
+        monthText : '月',
+        monthNames :[1,2,3,4,5,6,7,8,9,10,11,12],
+        monthNamesShort :[1,2,3,4,5,6,7,8,9,10,11,12],
+        yearText : '年',
+        width: 100,
+        dayText : '日'
+    });    
+    
+    $('.select').mobiscroll().select({
+        theme: 'ios',
+        display: 'bubble',
+        mode: 'mixed',
+        inputClass: 'i-txt',
+        width: 200
     });    
 });
 

@@ -33,7 +33,14 @@ return array(
         'CONSUMER_KEY' => 'XyOv9DT8WzcwwAeC0pUGA',
         'CONSUMER_SECRET' => 'HDwTsKWxF0YTLOBrBpLwQTjJPKRFEJ1DJ90VcfRD1s'
     ),
-
+    
+    //mongoに入れるOAuthのid
+    'user_profile_keys' => array(
+        'user_facebook_id',
+        'user_line_id',
+        'user_twitter_id'
+    ),
+        
     //RestURL系
     'rest_list' => array(
         'lendandborrow'      => 'share/rest/share/share_list/',

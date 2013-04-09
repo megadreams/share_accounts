@@ -6,8 +6,17 @@
     <title><?php // echo $title; ?></title>
     <?php echo Asset::css('bootstrap.css'); ?>
     <?php echo Asset::css('base.css'); ?>
-    <?php //echo Asset::css('content.css'); ?>        
+    <?php echo Asset::css('mobiscroll.custom-2.5.0.min.css'); ?>        
     <?php echo Asset::js('jquery.js'); ?>
+    <?php echo Asset::js('bootstrap.js'); ?>
+    <?php echo Asset::js('mobiscroll.custom-2.5.0.min.js'); ?>
+    <?php echo Asset::js('common.js'); ?>
+    <script type="text/javascript">// <![CDATA[
+        $(function(){
+
+        });
+        // ]]>        
+        </script>
 </head>
 <body>
     <?php echo $content; ?>

@@ -1,7 +1,7 @@
 <?php
 
 class Lib_Util {
-	
+    
 	//$properties = array(
 	//	'class' => 'hoge',
 	//	'style' => 'text-align: center; color: #ff0000;"
