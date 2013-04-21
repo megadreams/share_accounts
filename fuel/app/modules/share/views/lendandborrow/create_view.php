@@ -15,7 +15,7 @@
         <form>
             <div class="edit-area">
                 <div class="row-fluid edit-type">
-                    <div id="type-lend" class="span6 btn">
+                    <div id="type-lend" class="span6 btn type-active">
                         貸す
                     </div>
                     <div id="type-borrow" class="span6 btn">
@@ -37,7 +37,7 @@
                 <div class="row-fluid edit-content">
                     <div class="span2 ">
                         誰に
-                        <input type="hidden" class="regist" name="my_user_id" value="<?php echo $view_data['user_profile']['user_id'];?>;?>">
+                        <input type="hidden" class="regist" name="my_user_id" value="<?php echo $view_data['user_profile']['user_id'];?>">
                     </div>
                     <div class="span10">
                         <div>
@@ -148,6 +148,16 @@
 <script>
 $(function () {
 
+    $('#type-lend').click(function() {
+        $('input[name="type"]').val('lend');
+        $('#type-borrow').removeClass('type-active');
+        $('#type-lend').addClass('type-active');
+    });
+    $('#type-borrow').click(function() {
+        $('input[name="type"]').val('borrow');
+        $('#type-lend').removeClass('type-active');
+        $('#type-borrow').addClass('type-active');
+    });
     
     $('.add_btn').click(function() {
 

@@ -50,3 +50,28 @@ input {
 }
 
 
+.type-active {
+    color:white;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.00, #001ca8), color-stop(1.00, #2476ff));
+    background: -webkit-linear-gradient(#001ca8, #2476ff);
+    background: -moz-linear-gradient(#001ca8, #2476ff);
+    background: -o-linear-gradient(#001ca8, #2476ff);
+    background: -ms-linear-gradient(#001ca8, #2476ff);
+    background: linear-gradient(#001ca8, #2476ff);
+}
+
+.type-active:hover {
+    color:white;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.00, #001ca8), color-stop(1.00, #2476ff));
+    background: -webkit-linear-gradient(#001ca8, #2476ff);
+    background: -moz-linear-gradient(#001ca8, #2476ff);
+    background: -o-linear-gradient(#001ca8, #2476ff);
+    background: -ms-linear-gradient(#001ca8, #2476ff);
+    background: linear-gradient(#001ca8, #2476ff);
+}
+
+.modal {
+    width:90%;
+    left: 92%;
+    margin: -200px 0 0 -280px;
+}

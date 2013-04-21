@@ -25,8 +25,13 @@ class Lib_Userprofile {
             $user_frinend_ids[] = $friend['frined_user_id'];    
         }
         
-        return $this->mongo_wrap->where_in('user_id', $user_frinend_ids)->get('user_profile');
+        $friend_user =  $this->mongo_wrap->where_in('user_id', $user_frinend_ids)->get('user_profile');
         
+        $frend_list = array();
+        foreach ($friend_user as $datas) {
+            $frend_list[$datas['user_id']] = $datas;
+        }
+        return $frend_list;
     }
 }
 
