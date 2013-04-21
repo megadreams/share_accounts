@@ -126,17 +126,10 @@ $(function(){
     $('#leftmenu-btn').click(function() {
         leftmenu_toggle();
     });
-    //フリック用　（マウスムーブで実現）
-    $('#leftmenu-btn').mousemove(function() {
-        leftmenu_toggle();
-    });
     
     
     //右メニュークリック
     $('#rightmenu-btn').click(function() {
-        rightmenu_toggle();
-    });
-    $('#rightmenu-btn').mousemove(function() {
         rightmenu_toggle();
     });
 });
