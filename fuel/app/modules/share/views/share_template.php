@@ -12,18 +12,33 @@
         <?php echo Asset::js('mobiscroll.custom-2.5.0.min.js'); ?>
         <?php echo Asset::js('common.js'); ?>
         <script type="text/javascript">// <![CDATA[
-            var lefmenuOpenFlg = false;
+            var leftmenuOpenFlg = false;
+            var rightmenuOpenFlg = false;
             $(function(){
                 $('#leftmenu-btn').click(function() {
-                    if (lefmenuOpenFlg === true) {
-                        $(".main-contents").animate({"left": "0px"},  { duration: 'fast', easing: 'swing'});
-                        lefmenuOpenFlg = false;
+                    if (leftmenuOpenFlg === true) {
+                        $(".main-contents").animate({"left": "0%"},  { duration: 'fast', easing: 'swing'});
+                        leftmenuOpenFlg = false;
                         
                     } else {
+                        $('#rightmenu').css('z-index', 1);                        
+                        $('#leftmenu').css('z-index', 10);
                         $(".main-contents").animate({"left": "80%"},  { duration: 'fast', easing: 'swing'});
-                        lefmenuOpenFlg = true;
+                        leftmenuOpenFlg = true;
                     }
                 });
+                $('#rightmenu-btn').click(function() {
+                    if (rightmenuOpenFlg === true) {
+                        $(".main-contents").animate({"left": "0%"},  { duration: 'fast', easing: 'swing'});
+                        rightmenuOpenFlg = false;
+                        
+                    } else {
+                        $('#leftmenu').css('z-index', 1);
+                        $('#rightmenu').css('z-index',10);                        
+                        $(".main-contents").animate({"left": "-80%"},  { duration: 'fast', easing: 'swing'});
+                        rightmenuOpenFlg = true;
+                    }
+                });                
             });
         // ]]>
         </script>
@@ -40,7 +55,7 @@
                     <div class="span6">
                         <h1 id="contents_title">貸し借り管理</h1>        
                     </div>
-                    <div class="span3">
+                    <div id="rightmenu-btn" class="span3">
                         □
                     </div>
                 </div>

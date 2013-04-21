@@ -13,6 +13,9 @@
             </div>
         </div>
         <div class="sidemenu">
+            お知らせ
+        </div>
+        <div class="sidemenu">
             設定
         </div>
     </section>
