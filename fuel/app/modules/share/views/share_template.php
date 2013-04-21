@@ -13,6 +13,7 @@
         <?php echo Asset::js('common.js'); ?>
     </head>
     <body>
+        
          <?php echo $leftmenu; ?>
         <?php echo $rightmenu; ?>
        <section class="container-fluid main-contents">
