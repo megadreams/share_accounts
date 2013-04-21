@@ -14,7 +14,7 @@
             <li class="active">
                 <a href="#1" data-toggle="tab">人</a>
             </li>
-            <li>
+            <li class="span5">
                 <a href="#2" data-toggle="tab">カテゴリ</a>
             </li>
         </ul>

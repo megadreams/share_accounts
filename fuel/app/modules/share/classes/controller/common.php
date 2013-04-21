@@ -56,7 +56,11 @@ class Controller_Common extends \Controller_Template {
     }
     
     public function viewWrap($path = null, $title = '貸し借り管理') {        
-        $this->template->content = \View::forge($path,  array('view_data' => $this->view_data, 'title' => $title));
+        $this->template->content   = \View::forge($path,  array('view_data' => $this->view_data, 'title' => $title));
+        
+        //左サイドメニュ
+        $this->template->leftmenu  = \View::forge('inc/leftmenu',  array('view_data' => null));
+        $this->template->rightmenu = \View::forge('inc/rightmenu',  array('view_data' => null));
         
     }
 
