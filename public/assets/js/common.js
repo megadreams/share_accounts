@@ -82,12 +82,12 @@ var leftmenuOpenFlg = false;
 function leftmenu_toggle() {
     if (leftmenuOpenFlg === true) {
         $(".main-contents").animate({"left": "0%"},  { duration: 'fast', easing: 'swing'});
+        $("#leftmenu").animate({"left": "-80%"},  { duration: 'fast', easing: 'swing'});
         leftmenuOpenFlg = false;
 
     } else {
-        $('#rightmenu').css('z-index', 1);                        
-        $('#leftmenu').css('z-index', 10);
         $(".main-contents").animate({"left": "80%"},  { duration: 'fast', easing: 'swing'});
+        $("#leftmenu").animate({"left": "0"},  { duration: 'fast', easing: 'swing'});
         leftmenuOpenFlg = true;
     }    
 }
@@ -99,12 +99,12 @@ var rightmenuOpenFlg = false;
 function rightmenu_toggle() {
     if (rightmenuOpenFlg === true) {
           $(".main-contents").animate({"left": "0%"},  { duration: 'fast', easing: 'swing'});
+          $("#rightmenu").animate({"left": "100%"},  { duration: 'fast', easing: 'swing'});
           rightmenuOpenFlg = false;
 
       } else {
-          $('#leftmenu').css('z-index', 1);
-          $('#rightmenu').css('z-index',10);                        
           $(".main-contents").animate({"left": "-80%"},  { duration: 'fast', easing: 'swing'});
+          $("#rightmenu").animate({"left": "20%"},  { duration: 'fast', easing: 'swing'});
           rightmenuOpenFlg = true;
       }  
 }
