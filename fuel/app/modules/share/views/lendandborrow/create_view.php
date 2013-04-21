@@ -1,7 +1,7 @@
         <header class="header">
             <div class="row-fluid">
                 <div class="span4">
-                    <button class="btn">キャンセル</button>
+                    <a href="<?php echo \Uri::base() .'/share/top'; ?>">キャンセル</a>
                 </div>
                 <div class="span4">
                     <h1 id="contents_title">新規登録</h1>        
@@ -21,7 +21,8 @@
                     <div id="type-borrow" class="span6 btn">
                         借りる
                     </div>
-                    <input type="hidden" name="type" value="lend">
+                    <input type="hidden" class="regist" name="type" value="lend">
+                    <input type="hidden" class="regist" name="status" value="0">
                 </div>
 
                 <div class="row-fluid edit-content">
@@ -36,11 +37,12 @@
                 <div class="row-fluid edit-content">
                     <div class="span2 ">
                         誰に
+                        <input type="hidden" class="regist" name="my_user_id" value="<?php echo $view_data['user_profile']['user_id'];?>;?>">
                     </div>
                     <div class="span10">
                         <div>
                             <?php if (count($view_data['user_friends']) > 0) :?>
-                                <select class="regist select" name="">
+                                <select class="regist select" name="to_user_id">
                                 <?php foreach ($view_data['user_friends'] as $user_friends) :?>
                                     <option value=<?php echo $user_friends['user_id'];?>><?php echo $user_friends['user_name'];?></option>
                                 <?php endforeach;?>
@@ -82,7 +84,7 @@
                         期限
                     </div>
                     <div class="span10">
-                        <input class="lib_date" type="text" class="regist" name="limit" value="">
+                        <input class="regist lib_date" type="text" class="regist" name="limit" value="">
                     </div>                
                 </div>
                 
@@ -134,6 +136,7 @@
   </div>
 </div>
 
+ 
 <!-- 検索中のマーク -->
 <div id="popup_white">
     <div id="loading_gif">
@@ -152,9 +155,8 @@ $(function () {
         var sendData = getSendData();
         console.log(sendData);
         if (!confirm('登録しますか？')) return false;
-        
-        var sendUrl     = "<?php //echo \Uri::base() . 'share/rest/lendandborrow/regist/'?>";
-        var callBackUrl = "<?php //echo \Uri::base() . 'share/lendandborrow/top/' . $view_data['type']?>";
+        var sendUrl     = "<?php echo \Uri::base() . 'share/rest/lendandborrow/regist/'?>";
+        var callBackUrl = "<?php echo \Uri::base() . 'share/top/'; ?>";
         var result = regist(sendUrl, 'post', sendData, '登録しました', callBackUrl);
         
         if (result === true || result === false){

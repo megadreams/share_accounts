@@ -16,20 +16,44 @@ class Controller_Rest_Lendandborrow extends Controller_Rest_Commonrest {
     //http://share.com/share_accounts/public/share/rest/lendandborrow/regist?collection_id=3&date=2009&memo=1000&borrow_user_id=1&category=10&item=10&lend_user_id=1&limit=0&status=1
     
    public function post_regist() {
-       $lend_and_borrow_keys = \Config::get('lend_and_borrow_keys');
+       $validation = \Config::get('validation');
 
        //Inputデータの取り組み
        $input_data = \Input::post();
                   
        //バリデーションチェック
-       $validation = $this->validation($input_data, $lend_and_borrow_keys);
-
+       $validation_flg = $this->validation($input_data, $validation['lend_and_borrow']);
        //エラーチェック
-       if ($validation !== true) {
+       if ($validation_flg !== true) {
            $res = array('error' => true, 'msg' => 'バリデーションエラー', 'data' => $validation);
            $this->response($res);
            return;
        }
+       
+       //変換処理
+       
+       if ($input_data['type'] === \Config::get('TYPE_LEND')) {
+           $input_data['borrow_user_id'] = $input_data['to_user_id'];
+           $input_data['lend_user_id']   = $input_data['my_user_id'];
+           
+       } else if ($input_data['type'] === \Config::get('TYPE_BORROW')) {
+           $input_data['lend_user_id']   = $input_data['to_user_id'];
+           $input_data['borrow_user_id'] = $input_data['my_user_id'];
+           
+       } else {
+           $res = array('error' => true, 'msg' => 'type is not defined!', 'data' => null);
+           $this->response($res);
+           return;           
+       }
+       
+       //カテゴリがmoneyの場合、itemは数値
+       if ($input_data['category'] === 'money') {
+           $input_data['item'] = (int)$input_data['item'];
+       }
+       
+       
+       //コレクションに保存するデータのみ
+       $lend_and_borrow_keys = \Config::get('lend_and_borrow_keys');       
        
        //collection_idがあれば編集
        if (isset($input_data['collection_id'])) {
