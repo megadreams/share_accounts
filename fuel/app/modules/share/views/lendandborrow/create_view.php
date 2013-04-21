@@ -1,42 +1,19 @@
         <header class="header">
             <div class="row-fluid">
-                <div class="span3">
-                    <div>キャンセル</div>
+                <div class="span4">
+                    <button class="btn">キャンセル</button>
                 </div>
-                <div class="span6">
+                <div class="span4">
                     <h1 id="contents_title">新規登録</h1>        
                 </div>
-                <div class="span3">
+                <div class="span4">
+                    <button class="add_btn" type="button">登録</button>
                 </div>
             </div>
         </header>
 
-        <section class="edit-area">
-            <form>
-                <div class="edit-date">
-                    <input type="text" class="regist lib_date" name="date" value="">                
-                </div>
-                
-                <div class="row-fluid edit-name">
-                    <div class="span2">
-                        誰に
-                    </div>
-                    <div class="span6">
-                        <?php if (count($view_data['user_friends']) > 0) :?>
-                            <select class="regist select" name="">
-                            <?php foreach ($view_data['user_friends'] as $user_friends) :?>
-                                <option value=<?php echo $user_friends['user_id'];?>><?php echo $user_friends['user_name'];?></option>
-                            <?php endforeach;?>
-                            </select>
-                        <?php else:?>
-                            現在友達は登録されていません
-                        <?php endif;?>
-                    </div>
-                    <div class="span4">
-                        <a data-toggle="modal" href="#myModal" class="btn btn-primary">友達を探す</a>
-                    </div>
-                </div>
-                
+        <form>
+            <div class="edit-area">
                 <div class="row-fluid edit-type">
                     <div id="type-lend" class="span6 btn">
                         貸す
@@ -46,48 +23,93 @@
                     </div>
                     <input type="hidden" name="type" value="lend">
                 </div>
+
+                <div class="row-fluid edit-content">
+                    <div class="span2">
+                        いつ
+                    </div>
+                    <div class="span10">
+                        <input type="text" class="regist lib_date" name="date" value="">                
+                    </div>
+                </div>
                 
-                <div class="row-fluid edit-contents">
-                    <div class="span6">
+                <div class="row-fluid edit-content">
+                    <div class="span2 ">
+                        誰に
+                    </div>
+                    <div class="span10">
+                        <div>
+                            <?php if (count($view_data['user_friends']) > 0) :?>
+                                <select class="regist select" name="">
+                                <?php foreach ($view_data['user_friends'] as $user_friends) :?>
+                                    <option value=<?php echo $user_friends['user_id'];?>><?php echo $user_friends['user_name'];?></option>
+                                <?php endforeach;?>
+                                </select>
+                            <?php else:?>
+                                現在友達は登録されていません
+                            <?php endif;?>                            
+                        </div>
+                        <div class="text-right">
+                            <a data-toggle="modal" href="#myModal" class="btn btn-primary">友達を探す</a>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="row-fluid edit-content">
+                    <div class="span2">
+                        分類
+                    </div>
+                    <div class="span10">
                         <select class="regist select" name="category">
                             <option value="money">お金</option>
                         </select>                            
                     </div>
-                    <div class="span6">
-                        <input type="text" class="regist" name="item" value="0"> 円
-                    </div>
                 </div>
                 
-                <div class="edit-limit">
-                    期限：
-                    <input class="lib_date" type="text" class="regist" name="limit" value="">
-                </div>
                 
-                <div class="row-fluid edit-send">
+                <div class="row-fluid edit-content">
                     <div class="span2">
-                        通知：
-                    </div>
-                    <div class="span6">
-                        リストから選ぶ
-                    </div>
-                    <div class="span4">
-                        <a data-toggle="modal" href="#myModal" class="btn btn-primary">友達を探す</a>
-                    </div>
-                </div>
-                
-                <div class="row-fluid edit-memo">
-                    <div class="span2">
-                        メモ：
+                        金額
                     </div>
                     <div class="span10">
-                        <textarea class="regist" name="memo"></textarea>  
+                        <input type="text" class="regist text-right" name="item" value="0">
                     </div>
                 </div>
-                <div>
-                    <input class="add_btn" type="button" value="登録">        
+                
+                <div class="row-fluid edit-content">
+                    <div class="span2">
+                        期限
+                    </div>
+                    <div class="span10">
+                        <input class="lib_date" type="text" class="regist" name="limit" value="">
+                    </div>                
                 </div>
-            </form>
-        </section>
+                
+                <div class="row-fluid edit-content">
+                    <div class="span2">
+                        通知
+                    </div>
+                    <div class="span10">
+                        <div>
+                            リストから選ぶ
+                        </div>
+                        <div>
+                            <a data-toggle="modal" href="#myModal" class="btn btn-primary">友達を探す</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row-fluid edit-content">
+                    <div class="span2">
+                        メモ
+                    </div>
+                    <div class="span10">
+                        <textarea class="regist" name="memo" rows="4" cols="40"></textarea>  
+                    </div>
+                </div>
+            </div>
+        </form>
 
         
 <!-- モーダルビュー -->
@@ -119,19 +141,10 @@
     </div>
 </div>
     
-<?php /*    
+
 <script>
 $(function () {
-    $('.delete_btn').click(function() {
-        var collectionId = $("input[name='collection_id']")[0].val;
-        var sendData = {'collection_id': collectionId};
-        console.log(sendData);
-        if (!confirm('削除しますか？')) return false;        
-        var sendUrl     = "<?php echo \Uri::base() . 'share/rest/lendandborrow/delete/'?>";
-        var callBackUrl = "<?php echo \Uri::base() . 'share/lendandborrow/top/' . $view_data['type']?>";
-        var result = regist(sendUrl, 'post', sendData, '削除しました', callBackUrl);
-         
-    });
+
     
     $('.add_btn').click(function() {
 
@@ -140,8 +153,8 @@ $(function () {
         console.log(sendData);
         if (!confirm('登録しますか？')) return false;
         
-        var sendUrl     = "<?php echo \Uri::base() . 'share/rest/lendandborrow/regist/'?>";
-        var callBackUrl = "<?php echo \Uri::base() . 'share/lendandborrow/top/' . $view_data['type']?>";
+        var sendUrl     = "<?php //echo \Uri::base() . 'share/rest/lendandborrow/regist/'?>";
+        var callBackUrl = "<?php //echo \Uri::base() . 'share/lendandborrow/top/' . $view_data['type']?>";
         var result = regist(sendUrl, 'post', sendData, '登録しました', callBackUrl);
         
         if (result === true || result === false){
@@ -150,6 +163,8 @@ $(function () {
             console.log(result);
         }
      });
+     
+     
     $('.lib_date').scroller({
         preset: 'date',
         theme: 'ios',
@@ -165,7 +180,7 @@ $(function () {
         monthNames :[1,2,3,4,5,6,7,8,9,10,11,12],
         monthNamesShort :[1,2,3,4,5,6,7,8,9,10,11,12],
         yearText : '年',
-        width: 100,
+        width: 85,
         dayText : '日'
     });    
     
@@ -180,5 +195,4 @@ $(function () {
 
 </script>
 
-*/?>
 

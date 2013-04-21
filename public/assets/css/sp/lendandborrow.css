@@ -1,56 +1,52 @@
+/*ヘッターの固定化*/
+header {
+    position:fixed;
+    width:100%;
+}
 .edit-area {
     width:90%;
     border:1px dashed black;
     text-align:center;
-    margin:10px auto;
+    margin:0px auto;
+    margin-top:50px;
+    margin-bottom:30px;
     padding:10px;
+    overflow: scroll;
 }
+
+
 
 .select {
     width:100%;
 }
-
-/*日付登録エリア*/
-.edit-date {
-    
+input {
+    width:96%;    
 }
 
-/*名前登録エリア*/
-.edit-name {
-    line-height: 30px;
-}
 
 /*貸し借り選択エリア*/
+.edit-type {
+    border-bottom:1px solid rgba(0, 0, 0, 0.2);
+    box-shadow:rgba(255, 255, 255, 0.3) 0px 1px 0px; 
+}
+
 .edit-type div{
     height:44px;
     line-height: 40px;
     margin:5px 0px; 
     border:1px solid gray;
-    box-shadow:1px 0px 0px #808080;
+    box-shadow:1px 0px 0px #808080;    
 }
+
+
 
 /*内容登録エリア*/
-.edit-content {
-    
+.edit-content{
+    line-height: 30px;
+    margin:10px 0px;     
+    padding:5px 0px;
+    border-bottom:1px solid rgba(0, 0, 0, 0.2);
+    box-shadow:rgba(255, 255, 255, 0.3) 0px 1px 0px; 
 }
 
-input {
-    width:80%;    
-}
-
-/*期限設定エリア*/
-.edit-limit {
-    
-}
-
-/*通知設定エリア*/
-.edit-send {
-    height:30px;
-    line-height: 30px;    
-}
-
-/*メモエリア*/
-edit-memo {
-    
-}
 
