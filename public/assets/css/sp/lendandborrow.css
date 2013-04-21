@@ -1,0 +1,56 @@
+.edit-area {
+    width:90%;
+    border:1px dashed black;
+    text-align:center;
+    margin:10px auto;
+    padding:10px;
+}
+
+.select {
+    width:100%;
+}
+
+/*日付登録エリア*/
+.edit-date {
+    
+}
+
+/*名前登録エリア*/
+.edit-name {
+    line-height: 30px;
+}
+
+/*貸し借り選択エリア*/
+.edit-type div{
+    height:44px;
+    line-height: 40px;
+    margin:5px 0px; 
+    border:1px solid gray;
+    box-shadow:1px 0px 0px #808080;
+}
+
+/*内容登録エリア*/
+.edit-content {
+    
+}
+
+input {
+    width:80%;    
+}
+
+/*期限設定エリア*/
+.edit-limit {
+    
+}
+
+/*通知設定エリア*/
+.edit-send {
+    height:30px;
+    line-height: 30px;    
+}
+
+/*メモエリア*/
+edit-memo {
+    
+}
+

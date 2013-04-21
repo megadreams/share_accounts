@@ -66,7 +66,15 @@ class Controller_Lendandborrow extends Controller_Common {
         $this->viewWrap('lendandborrow/edit_view', '登録');
     }
         
+    /**
+     * 新規登録ページ
+     */
    
+    public function action_create() {
+        //ユーザの友達情報を取得する
+       	$this->view_data['user_friends'] = $this->lib_userprofile->get_user_friends();        
+        $this->viewWrap('lendandborrow/create_view', '登録');        
+    }
     
     
 }

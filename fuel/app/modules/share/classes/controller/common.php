@@ -11,7 +11,7 @@ class Controller_Common extends \Controller_Template {
 
     protected $context;
 
-
+    protected $seg;
     protected $view_data;
     
     protected $lib_userprofile;
@@ -26,7 +26,13 @@ class Controller_Common extends \Controller_Template {
         
     public function before() {
         //親クラスのbeforeを呼び出して, $this->templateを使えるようにしてもらう
-        $this->template = "share_template";
+        $this->seg = \Uri::segments();
+        if (in_array('top', $this->seg)) {
+            $this->template = "share_top_template";
+        } else {
+            $this->template = "share_other_template";
+        }
+        
         parent::before();
 /*
         $this->user_profile_id = \Session::get('user_profile_id');
@@ -57,6 +63,7 @@ class Controller_Common extends \Controller_Template {
     
     public function viewWrap($path = null, $title = '貸し借り管理') {        
         $this->template->content   = \View::forge($path,  array('view_data' => $this->view_data, 'title' => $title));
+        $this->template->header  = \View::forge('inc/header',  array('view_data' => null));
         
         //左サイドメニュ
         $this->template->leftmenu  = \View::forge('inc/leftmenu',  array('view_data' => null));

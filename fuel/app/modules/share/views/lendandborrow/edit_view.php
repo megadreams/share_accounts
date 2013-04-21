@@ -1,12 +1,3 @@
-<div class="container-fluid main-contents">
-    <div>
-        <a href="<?php echo \Uri::base() . 'share/lendandborrow/top/' . $view_data['type'];?>">戻る</a>
-    </div>
-    <header class="header">
-        <h1 id="contents_title">
-            <?php echo $view_data['user_profile']['user_name']; ?>さんが，借りているリスト
-        </h1>        
-    </header>
     <section>
     <form>
     <table class="edit_area">
@@ -18,13 +9,10 @@
                 </td>
             </tr>
             <tr>
-                <th>
-                    <?php echo ($view_data['type'] === \Config::get('TYPE_LEND'))? '貸している人': '借りている人'?>
-                </th>
                 <td>
                     <div>
                         <div class="user_select">
-                            <?php if (count($view_data['user_friends']) > 0):?>
+                            <?php /* ?>
                                 <select class="regist select" name="<?php echo ($view_data['type'] === \Config::get('TYPE_LEND'))? 'borrow_user_id': 'lend_user_id'?>">
                                 <?php foreach ($view_data['user_friends'] as $user_friends) :?>
                                     <option value=<?php echo $user_friends['user_id'];?>><?php echo $user_friends['user_name'];?></option>
@@ -33,6 +21,9 @@
                             <?php else:?>
                                 現在友達は登録されていません
                             <?php endif;?>
+                            <?php
+                             */
+                            ?>
                         </div>
                         <div>
                             <a data-toggle="modal" href="#myModal" class="btn btn-primary">友達を探す</a>
@@ -59,6 +50,7 @@
             <tr>
                 <th>ステータス</th>
                 <td>
+                    <?php /*
                     <select class="regist select" name="status">
                         <?php $status_list = \Config::get('status'); ?>
                         <?php foreach($status_list[$view_data['type']] as $id =>$status):?>
@@ -69,6 +61,8 @@
                             <?php endif;?>
                         <?php endforeach; ?>
                     </select>
+                     * 
+                     */?>
                 </td>
             </tr>
             <tr>
@@ -85,16 +79,17 @@
             </tr>            
             </tbody>
         </table>
+        <?php /*
         <input class="regist" type="hidden" name="<?php echo ($view_data['type'] === \Config::get('TYPE_LEND'))? 'lend_user_id': 'borrow_user_id'?>" value=<?php echo $view_data['user_profile']['user_id']; ?>>
         <input class="add_btn" type="button" value="登録">
         <?php if (isset($view_data['lend_and_borrow_mst']) === true): ?>
             <input class="regist" type="hidden" name="collection_id" value="<?php echo $view_data['lend_and_borrow_mst']['collection_id'];?>">
             <input class="delete_btn btn-danger" type="button" value="削除">
         <?php endif; ?>
-
+*/?>
     </form>
-</section>
 
+        
 <!-- モーダルビュー -->
  <!-- sample modal content -->
 <div id="myModal" class="modal hide fade">
@@ -124,7 +119,7 @@
     </div>
 </div>
     
-    
+<?php /*    
 <script>
 $(function () {
     $('.delete_btn').click(function() {
@@ -184,3 +179,6 @@ $(function () {
 });
 
 </script>
+
+*/?>
+
