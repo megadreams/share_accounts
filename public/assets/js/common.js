@@ -73,3 +73,70 @@ function error_ajax(msg) {
     ingicater_end();
     return false;
 }
+
+
+/**
+ * 左メニューを押した時の処理
+ */
+var leftmenuOpenFlg = false;
+function leftmenu_toggle() {
+    if (leftmenuOpenFlg === true) {
+        $(".main-contents").animate({"left": "0%"},  { duration: 'fast', easing: 'swing'});
+        leftmenuOpenFlg = false;
+
+    } else {
+        $('#rightmenu').css('z-index', 1);                        
+        $('#leftmenu').css('z-index', 10);
+        $(".main-contents").animate({"left": "80%"},  { duration: 'fast', easing: 'swing'});
+        leftmenuOpenFlg = true;
+    }    
+}
+
+/**
+ * 右メニューを押した時の処理
+ */
+var rightmenuOpenFlg = false;
+function rightmenu_toggle() {
+    if (rightmenuOpenFlg === true) {
+          $(".main-contents").animate({"left": "0%"},  { duration: 'fast', easing: 'swing'});
+          rightmenuOpenFlg = false;
+
+      } else {
+          $('#leftmenu').css('z-index', 1);
+          $('#rightmenu').css('z-index',10);                        
+          $(".main-contents").animate({"left": "-80%"},  { duration: 'fast', easing: 'swing'});
+          rightmenuOpenFlg = true;
+      }  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//読み込み後実行ファイル
+$(function(){
+    //左メニュークリック
+    $('#leftmenu-btn').click(function() {
+        leftmenu_toggle();
+    });
+    //フリック用　（マウスムーブで実現）
+    $('#leftmenu-btn').mousemove(function() {
+        leftmenu_toggle();
+    });
+    
+    
+    //右メニュークリック
+    $('#rightmenu-btn').click(function() {
+        rightmenu_toggle();
+    });
+    $('#rightmenu-btn').mousemove(function() {
+        rightmenu_toggle();
+    });
+});

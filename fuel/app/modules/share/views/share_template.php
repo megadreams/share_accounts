@@ -11,37 +11,6 @@
         <?php echo Asset::js('bootstrap.js'); ?>
         <?php echo Asset::js('mobiscroll.custom-2.5.0.min.js'); ?>
         <?php echo Asset::js('common.js'); ?>
-        <script type="text/javascript">// <![CDATA[
-            var leftmenuOpenFlg = false;
-            var rightmenuOpenFlg = false;
-            $(function(){
-                $('#leftmenu-btn').click(function() {
-                    if (leftmenuOpenFlg === true) {
-                        $(".main-contents").animate({"left": "0%"},  { duration: 'fast', easing: 'swing'});
-                        leftmenuOpenFlg = false;
-                        
-                    } else {
-                        $('#rightmenu').css('z-index', 1);                        
-                        $('#leftmenu').css('z-index', 10);
-                        $(".main-contents").animate({"left": "80%"},  { duration: 'fast', easing: 'swing'});
-                        leftmenuOpenFlg = true;
-                    }
-                });
-                $('#rightmenu-btn').click(function() {
-                    if (rightmenuOpenFlg === true) {
-                        $(".main-contents").animate({"left": "0%"},  { duration: 'fast', easing: 'swing'});
-                        rightmenuOpenFlg = false;
-                        
-                    } else {
-                        $('#leftmenu').css('z-index', 1);
-                        $('#rightmenu').css('z-index',10);                        
-                        $(".main-contents").animate({"left": "-80%"},  { duration: 'fast', easing: 'swing'});
-                        rightmenuOpenFlg = true;
-                    }
-                });                
-            });
-        // ]]>
-        </script>
     </head>
     <body>
          <?php echo $leftmenu; ?>
@@ -64,7 +33,11 @@
             <footer>
                 <small>Copyright 2012- <?php echo date('Y');?> megadreams　All Rights Reserved.</small>
             </footer>
-        </section>
-        
+        </section>        
     </body>
+    <script type="text/javascript">// <![CDATA[
+
+    // ]]>
+    </script>
+    
 </html>
