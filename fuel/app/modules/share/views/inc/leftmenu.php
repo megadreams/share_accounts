@@ -5,8 +5,8 @@
                     <div class="span4">
                         <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash4/372427_1732099499_1189752884_q.jpg" alt="画像">
                     </div>
-                    <div class="span7 account-name">
-                        藤原　涼
+                    <div class="span6 account-name">
+                        <?php echo $view_data['user_profile']['user_name'];?>
                     </div>
                     <div class="span1 account-detail">
                         ▼

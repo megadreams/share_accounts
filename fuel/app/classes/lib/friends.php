@@ -1,5 +1,6 @@
 <?php
 
+
 class Lib_Friends{
     
     //facebookから友達一覧を取得する
@@ -9,7 +10,7 @@ class Lib_Friends{
         
         //アクセストークンが無ければ認証画面へ
         if ($access_token === null) {
-            \Response::redirect('contents/auth/index');
+            \Response::redirect('share/auth/index');
         }
         //友達情報を取得する
         $user_friend = file_get_contents('https://graph.facebook.com/me/friends?locale=ja&' . $access_token);

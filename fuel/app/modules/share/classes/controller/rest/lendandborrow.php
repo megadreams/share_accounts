@@ -13,8 +13,7 @@ class Controller_Rest_Lendandborrow extends Controller_Rest_Commonrest {
    /**
     * 貸し借り表への登録処理
     */
-    //http://share.com/share_accounts/public/share/rest/lendandborrow/regist?collection_id=3&date=2009&memo=1000&borrow_user_id=1&category=10&item=10&lend_user_id=1&limit=0&status=1
-    
+    //http://share.com/share_accounts/public/share/rest/lendandborrow/regist?type=lend&to_user_id=2&my_user_id=1&category=1&date=0&item=9&limit=0&memo=9&status=10&user_type=facebook&target_user_name=テスト
    public function post_regist() {
        $validation = \Config::get('validation');
 
@@ -29,9 +28,25 @@ class Controller_Rest_Lendandborrow extends Controller_Rest_Commonrest {
            $this->response($res);
            return;
        }
+
+       //ユーザチェック
+       if ($input_data['user_type'] === 'default') {
+           //何もしない
+           
+        } else if ($input_data['user_type'] === 'facebook') {
+            $lib_userprofile = new Lib_Userprofile($this->mongo_wrap);
+            $user_profile    =  $lib_userprofile->get_user_profile($input_data['my_user_id']);
+            
+            //このIDのユーザが既に登録されているか？されていないなら登録！友達設定まで行うこと
+            $to_user_id = $lib_userprofile->get_user_profile_id($input_data['to_user_id'], $input_data['target_user_name'], $input_data['user_type']);
+            $input_data['to_user_id'] = $to_user_id; //取得したユーザID
+
+            //友達登録
+            $lib_userprofile->create_user_friend($user_profile, $to_user_id);            
+       }
+       
        
        //変換処理
-       
        if ($input_data['type'] === \Config::get('TYPE_LEND')) {
            $input_data['borrow_user_id'] = $input_data['to_user_id'];
            $input_data['lend_user_id']   = $input_data['my_user_id'];
@@ -115,4 +130,44 @@ class Controller_Rest_Lendandborrow extends Controller_Rest_Commonrest {
         $res = array('error' => false);
         $this->response($res);     
     }
+    
+    
+    
+    /*
+     * Facebookの友達リストを返すAPI
+     */
+    //http://share.com/share_accounts/public/share/rest/lendandborrow/facebook_friends
+    
+    public function get_facebook_friends() {
+        //FBから友達リストの追加
+        $fb_friends = $this->lib_friends->get_facebook_friend();
+        
+        $result = array(
+            'error' => false,
+            'data'  => $fb_friends 
+        );
+        $this->response($result, 200);
+        
+    }
+    
+    /*
+     * アプリの友達リストを返すAPI
+     */
+    public function get_app_friends ($user_profile_id) {
+        //FBから友達リストの追加
+        $sql  = "SELECT up.id, up.user_name FROM user_friends uf";
+        $sql .= " INNER JOIN user_profile up on up.id = uf.friend_user_id";
+        $sql .= " WHERE ";
+        $sql .= " uf.user_profile_id = " . $user_profile_id . ";";
+        $model_wrap = new \Lib_Modelwrap();
+        $user_friend_list = $model_wrap->call('DB', 'query', $sql);
+        $lists = array();
+        if (count($user_friend_list) > 0) {
+            foreach($user_friend_list as $friend) {
+                $lists[] = $friend;
+            }
+        }
+        $this->response(array('data' => $lists), 200);
+        
+    }      
 }

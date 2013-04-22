@@ -40,19 +40,22 @@
                         <input type="hidden" class="regist" name="my_user_id" value="<?php echo $view_data['user_profile']['user_id'];?>">
                     </div>
                     <div class="span10">
-                        <div>
+                        <div id="user-list">
                             <?php if (count($view_data['user_friends']) > 0) :?>
-                                <select class="regist select" name="to_user_id">
+                            
+                                <select class="regist select" name="to_user_id">                                                                        
                                 <?php foreach ($view_data['user_friends'] as $user_friends) :?>
                                     <option value=<?php echo $user_friends['user_id'];?>><?php echo $user_friends['user_name'];?></option>
                                 <?php endforeach;?>
                                 </select>
+                            
                             <?php else:?>
-                                現在友達は登録されていません
-                            <?php endif;?>                            
+                                <p>現在友達は登録されていません</p>
+                            <?php endif;?>
                         </div>
                         <div class="text-right">
                             <a data-toggle="modal" href="#myModal" class="btn btn-primary">友達を探す</a>
+                            <input class="regist" type="hidden" name="user_type" value="default">
                         </div>
                     </div>
                 </div>
@@ -124,7 +127,8 @@
   <div class="modal-body">
     <h4>Facebook</h4>
     <p>Facebookから友達リストを取得します</p>
-
+    <button class="get_fb_friends">FB友達取得</button>
+    
     <h4>Twitter</h4>
     <p>Twitterから友達リストを取得します</p>
 
@@ -147,6 +151,10 @@
 
 <script>
 $(function () {
+    $('.get_fb_friends').click(function () {
+        var sendUrl = 'http://share.com/share_accounts/public/share/rest/lendandborrow/facebook_friends';
+        var result = regist(sendUrl, 'get', null, null, null, getFriendList);
+    });
 
     $('#type-lend').click(function() {
         $('input[name="type"]').val('lend');
@@ -164,6 +172,13 @@ $(function () {
         //classからsendDataを取得する
         var sendData = getSendData();
         console.log(sendData);
+        
+        
+        //FBなどから取得した場合はユーザ名も送信する　target_user_name
+        if (sendData['user_type'] !== 'default') {
+            sendData['target_user_name'] = $('select[name="to_user_id"] option:selected').text();
+        }
+        
         if (!confirm('登録しますか？')) return false;
         var sendUrl     = "<?php echo \Uri::base() . 'share/rest/lendandborrow/regist/'?>";
         var callBackUrl = "<?php echo \Uri::base() . 'share/top/'; ?>";
@@ -205,6 +220,34 @@ $(function () {
     });    
 });
 
+function getFriendList(friendList) {
+    alert('取得しました');
+    
+    $('input[name="user_type"]').val(friendList['type']);
+    
+    //現在のユーザリストを削除
+    $('#user-list').empty();
+    var appendSelect = '<select class="regist select" name="to_user_id"></select>';
+    $('#user-list').append(appendSelect);
+
+
+    //FBのユーザリストを挿入
+    $.each(friendList['data'], function() {
+        console.log(this['id']);
+        console.log(this['name']);
+        var insertElement = '<option value="' + this['id'] + '">' + this['name'] + '</option>';
+        $('select[name="to_user_id"]').append(insertElement);
+    });
+
+    //再度選択出来るように設定
+    $('select[name="to_user_id"]').mobiscroll().select({
+        theme: 'ios',
+        display: 'bubble',
+        mode: 'mixed',
+        inputClass: 'i-txt',
+        width: 200
+    });  
+}
 </script>
 
 

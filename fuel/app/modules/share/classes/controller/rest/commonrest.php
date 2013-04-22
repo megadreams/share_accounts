@@ -6,9 +6,11 @@ class Controller_Rest_Commonrest extends \Controller_Rest {
         
     protected $mongo_wrap;
     protected $lib_lendandborrow;
+    protected $lib_friends;
     
     public function before() {
         parent::before();    
+        $this->lib_friends = new Lib_Friends();
         $this->mongo_wrap = \Lib_Mongowrap::getInstance();
     }
     

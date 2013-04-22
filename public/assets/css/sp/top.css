@@ -117,3 +117,9 @@
     margin:10px auto;
     padding:10px;
 }
+
+
+#rightmenu a {
+    color:white;
+    text-decoration: none;
+}

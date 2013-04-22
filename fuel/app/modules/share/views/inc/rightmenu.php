@@ -1,9 +1,11 @@
         <section id="rightmenu">
             <section>
                 <h1 class="sidemenu-title side-line">登録</h1>
-                <div class="sidemenu">
-                    <a href="<?php echo \Uri::base() . '/share/lendandborrow/create/';?>">新規登録</a>
-                </div>
+                <a href="<?php echo \Uri::base() . '/share/lendandborrow/create/';?>">
+                    <div class="sidemenu">
+                        新規登録
+                    </div>
+                </a>
                 <h1 class="sidemenu-title side-line">編集</h1>
                 <div class="sidemenu">
                     編集

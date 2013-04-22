@@ -27,7 +27,7 @@ function getSendData() {
 /**
  * Ajax処理
  */
-function regist(sendUrl, sendType, sendData, successMsg, callBackUrl) {
+function regist(sendUrl, sendType, sendData, successMsg, callBackUrl, successFunc) {
     ingicater_start();
     $.ajax({
         dataType: 'json',
@@ -39,23 +39,35 @@ function regist(sendUrl, sendType, sendData, successMsg, callBackUrl) {
             var returnData = false;
             
             if (data['error'] === false) {
-                alert(successMsg);
+                ingicater_end();
+                
+                if (successMsg !== null) {
+                    alert(successMsg);                
+                }
                 if (callBackUrl !== null) {
                     location.href = callBackUrl;                
                 }
-                returnData = true;
+                
+                if (successFunc !== null) {
+                    successFunc(data['data']);
+                }
+                
             } else {
                 //エラー処理をいくつか
                 if (data['error_code'] === 1) {
                     alert('必要な項目が入力されていません。');
-                    returnData = data['data'];
+                    
+                    //存在チェック
+                    if ('data' in data) {
+                        returnData = data['data'];
+                    }
                     
                 } else {
                     alert('処理が成功しませんでした');
                 }
-                ingicater_end();
-                return returnData;
             }
+            return returnData;
+            
         },
         error: function(msg) {
             return error_ajax(msg);

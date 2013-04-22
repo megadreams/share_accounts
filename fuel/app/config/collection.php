@@ -14,6 +14,7 @@ return array(
             'limit'        => 'int',
             'memo'         => 'string',
             'status'       => 'int',
+            'user_type'    => 'string',
         )
     ),
     

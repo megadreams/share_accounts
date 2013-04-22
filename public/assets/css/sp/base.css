@@ -35,8 +35,16 @@
 
 /*ヘッダー部分*/
 .header {
-    background:black;
     color:white;
+    text-shadow:1px -1px 0 rgba(0, 0, 0, 1);
+
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.00, #989898), color-stop(1.00, #272727));
+    background: -webkit-linear-gradient(#989898, #272727);
+    background: -moz-linear-gradient(#989898, #272727);
+    background: -o-linear-gradient(#989898, #272727);
+    background: -ms-linear-gradient(#989898, #272727);
+    background: linear-gradient(#989898, #272727);
+
 }
 #contents_title {
     font-size:120%;

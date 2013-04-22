@@ -75,3 +75,7 @@ input {
     left: 92%;
     margin: -200px 0 0 -280px;
 }
+
+.display-hidden {
+    display:none;
+}

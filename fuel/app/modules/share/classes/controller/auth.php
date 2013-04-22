@@ -6,7 +6,7 @@
 
 namespace Share;
 
-class Controller_Auth extends \Controller_Commonlogin {
+class Controller_Auth extends Controller_Common {
     
     public $callback_url;
     
@@ -41,24 +41,24 @@ class Controller_Auth extends \Controller_Commonlogin {
  
 
         // facebook の user_id + name(表示名)をセット
-        $user_id = $user->id;
-        $name    = $user->name;
+        $fb_user_id = (int)$user->id;
+        $user_name  = $user->name;
 
-        $user_facebook = $this->model_wrap->call('Model_User_Facebook', 'find', 'first', array(
-            'where' => array(
-                'fb_id' => $user_id
-            )
-        ));
+        //user_profileに既に登録されているかを取得する
+        $user_facebook = $this->mongo_wrap->where(array('user_facebook_id' => $fb_user_id))->get_one('user_profile');
+        
+        
         // 初回ユーザかチェックするロジック
         if($user_facebook === null){
-            $user_profile = $this->lib_userprofile->add_fb_user($this->model_wrap, $user_id, $name);
-        } else {
-             //情報を取得する
-            $user_profile = $this->model_wrap->call('Model_User_Profile', 'find', 'first', array(
-                'where' => array(
-                    'user_facebook_id' => $user_facebook->id
-                )
-            )); 
+            //新規登録
+            $insert_data = array(
+                'user_facebook_id' => $fb_user_id,
+                'user_name'        => $user_name,
+                'user_line_id'     => null,
+                'user_twitter_id'  => null,
+            );
+            \Lib_Mongowrap::insert_data('user_profile', $insert_data);       
+            $user_facebook = $this->mongo_wrap->where(array('user_facebook_id' => (int)$fb_user_id))->get_one('user_profile');
         }
         //トーク−ンの発行
 /*        
@@ -72,11 +72,10 @@ class Controller_Auth extends \Controller_Commonlogin {
         \Session::set('token_id', $token_table->id);
   */      
  
-        \Session::set('user_profile_id', $user_profile->id);
-        \Session::set('user_name', $user_profile->user_name);
+        \Session::set('user_id', $user_facebook['user_id']);
         \Session::set('access_token', $access_token);
         
-        \Response::redirect('contents/top');
+        \Response::redirect('share/top');
 
     }
  

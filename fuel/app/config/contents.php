@@ -23,9 +23,9 @@ return array(
     ),
     //Facebook
     'facebook' => array(
-      'APP_ID' => '344664518982268', 
+      'APP_ID'     => '344664518982268', 
       'APP_SECRET' => 'f6d5ea7a24a9258c96a2caa4c5a0a052',
-      'CALLBACK' => 'contents/auth/callback/',
+      'CALLBACK'   => 'share/auth/callback/',
     ),
     
     //Twitter
