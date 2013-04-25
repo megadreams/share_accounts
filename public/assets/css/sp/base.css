@@ -50,8 +50,6 @@
     font-size:120%;
 }
 
-
-
 /*フッター*/
 footer {
     /*!important style強制適用*/
@@ -67,6 +65,18 @@ footer {
     font-size:80%;
     text-align:right;
     padding-right:10px;
+}
+
+/*チュートリアル画面*/
+.tutorial-area {
+    text-align:center;
+    border:1px solid black;
+    width:300px;
+    height:200px;
+    
+}
+
+.tutorial {
 }
 
 
@@ -110,6 +120,11 @@ footer {
     z-index: 101;
     display: none;
 }
+
+
+
+
+
 
 input[type="button"] {
     width:150px;
