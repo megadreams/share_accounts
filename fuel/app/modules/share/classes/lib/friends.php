@@ -29,10 +29,7 @@ class Lib_Friends{
         }
         
         
-        return array(
-            'data' => $return_data,
-            'type' => 'facebook',
-        );
+        return $return_data;
     } 
     
 }

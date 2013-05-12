@@ -97,11 +97,16 @@
                     </div>
                     <div class="span10">
                         <div>
+                            現在実装中です
+                        </div>
+                        <!--
+                        <div>
                             リストから選ぶ
                         </div>
                         <div>
                             <a data-toggle="modal" href="#myModal" class="btn btn-primary">友達を探す</a>
                         </div>
+                        -->
                     </div>
                 </div>
                 
@@ -152,7 +157,7 @@
 <script>
 $(function () {
     $('.get_fb_friends').click(function () {
-        var sendUrl = 'http://share.com/share_accounts/public/share/rest/lendandborrow/facebook_friends';
+        var sendUrl = "<?php echo \Uri::base() . "share/rest/lendandborrow/facebook_friends";?>";
         var result = regist(sendUrl, 'get', null, null, null, getFriendList);
     });
 
@@ -233,8 +238,8 @@ function getFriendList(friendList) {
 
     //FBのユーザリストを挿入
     $.each(friendList['data'], function() {
-        console.log(this['id']);
-        console.log(this['name']);
+//        console.log(this['id']);
+//        console.log(this['name']);
         var insertElement = '<option value="' + this['id'] + '">' + this['name'] + '</option>';
         $('select[name="to_user_id"]').append(insertElement);
     });

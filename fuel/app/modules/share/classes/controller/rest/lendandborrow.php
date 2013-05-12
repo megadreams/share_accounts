@@ -141,10 +141,10 @@ class Controller_Rest_Lendandborrow extends Controller_Rest_Commonrest {
     public function get_facebook_friends() {
         //FBから友達リストの追加
         $fb_friends = $this->lib_friends->get_facebook_friend();
-        
         $result = array(
             'error' => false,
-            'data'  => $fb_friends 
+            'data'  => $fb_friends,
+            'type'  => 'facebook'
         );
         $this->response($result, 200);
         

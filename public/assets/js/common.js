@@ -49,7 +49,7 @@ function regist(sendUrl, sendType, sendData, successMsg, callBackUrl, successFun
                 }
                 
                 if (successFunc !== null) {
-                    successFunc(data['data']);
+                    successFunc(data);
                 }
                 
             } else {
