@@ -4,10 +4,10 @@
             <div class="tabbable">
                 <ul class="nav nav-tabs main-navigation">
                     <li class="active">
-                        <a href="#lend" data-toggle="tab">貸している</a>
+                        <a href="#lend" class="lend" data-toggle="tab">貸している</a>
                     </li>
                     <li>
-                        <a href="#borrow" data-toggle="tab">借りている</a>
+                        <a href="#borrow" class="borrow" data-toggle="tab">借りている</a>
                     </li>
                 </ul>
             </div>
@@ -55,20 +55,29 @@
                 <section class="tab-pane" id="borrow">
                     <?php if (count($view_data['borrow_list']) > 0):?>
                         <?php foreach ($view_data['borrow_list'] as $borrow_list):?>
-                            <div class="list-view">
-                                 <div class="text-left">
-                                    <?php echo $view_data['user_friends'][$borrow_list['lend_user_id']]['user_name'];?>さん
-                                 </div>
-                                <div>
-                                    <?php echo $view_data['status']['borrow'][$lend_list['status']]?>                                        
+                            <div class="list-view row-fluid">                            
+                                <div class="span1 checkbox" style="display:none;">
+                                    <input type="checkbox" name="borrowcheck" value="<?php echo $lend_list['collection_id'];?>">
                                 </div>
-                                 <div>
-                                    <?php echo $borrow_list['item'];?>円
-                                 </div>
-                                 <div>
-                                    <?php echo $borrow_list['date'];?>日に借りました
-                                 </div>
-                             </div>            
+
+                                <a href="<?php echo \Uri::base() . 'share/lendandborrow/edit/lend/' . $lend_list['collection_id'];?>">
+                                <div class="span11">
+                                
+                                    <div class="text-left">
+                                       <?php echo $view_data['user_friends'][$borrow_list['lend_user_id']]['user_name'];?>さん
+                                    </div>
+                                   <div>
+                                       <?php echo $view_data['status']['borrow'][$borrow_list['status']]?>                                        
+                                   </div>
+                                    <div>
+                                       <?php echo $borrow_list['item'];?>円
+                                    </div>
+                                    <div>
+                                       <?php echo $borrow_list['date'];?>日に借りました
+                                    </div>
+                                </div>            
+                                </a>
+                            </div>
                         <?php endforeach;?>
                     <?php else:?>
                         <div>

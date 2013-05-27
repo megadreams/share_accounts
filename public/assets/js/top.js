@@ -35,6 +35,9 @@ $(function(){
         var msg;
         var tayp;
         
+        //タブの状態を取得し、貸しているリストか借りているリストかを取得
+        var tabActive = $('.main-navigation li.active a').attr('class');
+        
         //ステータスを「返済済み」に変更する
         if (funcType === 'chage-status') {
             msg = '変更';
@@ -48,7 +51,8 @@ $(function(){
         
         //classからsendDataを取得する
         var checkbox=[];
-        $('[name="lendcheck"]:checked').each(function(){
+        var checkName = tabActive + "check";
+        $('[name="' + checkName + '"]:checked').each(function(){
           checkbox.push($(this).val());
         }); 
         var sendData = {'checkbox': checkbox, 'type':tayp, 'status': 1};
