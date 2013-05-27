@@ -30,4 +30,10 @@ return array(
             'status'         => 'string',
     ),
     
+    //mongoに入れるlend_and_borrowのkey update用
+    'lend_and_borrow_keys_update' => array(
+            'collection_id' => 'int',        
+            'limit'         => 'int',
+            'status'        => 'string',
+    )
 );

@@ -16,7 +16,10 @@ class Controller_Top extends Controller_Common {
 
         //ユーザの友達情報を取得する
        	$this->view_data['user_friends'] = $this->lib_userprofile->get_user_friends();
-        
+
+        //ステータス状況の取得
+        $this->view_data['status'] = \Config::get('status');
+
         $this->viewWrap('top/index', '貸し借り管理');
     }
 }

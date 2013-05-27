@@ -3,30 +3,6 @@
         <h1 id="contents_title">ログイン画面</h1>        
     </header>
 
-    <?php //ここにチュートリアル的な何かが入れば良い ?>
-    <section class="tutorial-area">
-        <div class="tutorial">
-            １
-        </div>
-        <div class="tutorial">
-            １
-        </div>
-        <div class="tutorial">
-            １
-        </div>
-        <div class="tutorial">
-            １
-        </div>
-        <div>
-            <ul>
-                <li>◯</li>
-                <li>◯</li>
-                <li>◯</li>
-                <li>◯</li>
-            </ul>
-        </div>
-    </section>
-
 
 
     <!-- メニューエリア-->

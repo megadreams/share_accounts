@@ -118,6 +118,9 @@
                         <textarea class="regist" name="memo" rows="4" cols="40"></textarea>  
                     </div>
                 </div>
+                <div>
+                   <button class="add_btn" type="button">登録</button>
+                </div>
             </div>
         </form>
 
@@ -175,7 +178,7 @@ $(function () {
     $('.add_btn').click(function() {
 
         //classからsendDataを取得する
-        var sendData = getSendData();
+        var sendData = getSendData('.regist');
         console.log(sendData);
         
         
@@ -187,7 +190,7 @@ $(function () {
         if (!confirm('登録しますか？')) return false;
         var sendUrl     = "<?php echo \Uri::base() . 'share/rest/lendandborrow/regist/'?>";
         var callBackUrl = "<?php echo \Uri::base() . 'share/top/'; ?>";
-        var result = regist(sendUrl, 'post', sendData, '登録しました', callBackUrl);
+        var result = regist(sendUrl, 'post', sendData, '登録しました', callBackUrl, null);
         
         if (result === true || result === false){
             //何もしない？

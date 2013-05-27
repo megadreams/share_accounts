@@ -19,56 +19,61 @@ class Controller_Rest_Lendandborrow extends Controller_Rest_Commonrest {
 
        //Inputデータの取り組み
        $input_data = \Input::post();
-                  
-       //バリデーションチェック
-       $validation_flg = $this->validation($input_data, $validation['lend_and_borrow']);
-       //エラーチェック
-       if ($validation_flg !== true) {
-           $res = array('error' => true, 'msg' => 'バリデーションエラー', 'data' => $validation);
-           $this->response($res);
-           return;
-       }
-
-       //ユーザチェック
-       if ($input_data['user_type'] === 'default') {
-           //何もしない
+              
+       //update処理
+       if (isset($input_data['collection_id']) === true) {
+            //コレクションに保存するデータのみ　update用
+            $lend_and_borrow_keys = \Config::get('lend_and_borrow_keys_update');
            
-        } else if ($input_data['user_type'] === 'facebook') {
-            $lib_userprofile = new Lib_Userprofile($this->mongo_wrap);
-            $user_profile    =  $lib_userprofile->get_user_profile($input_data['my_user_id']);
-            
-            //このIDのユーザが既に登録されているか？されていないなら登録！友達設定まで行うこと
-            $to_user_id = $lib_userprofile->get_user_profile_id($input_data['to_user_id'], $input_data['target_user_name'], $input_data['user_type']);
-            $input_data['to_user_id'] = $to_user_id; //取得したユーザID
-
-            //友達登録
-            $lib_userprofile->create_user_friend($user_profile, $to_user_id);            
-       }
-       
-       
-       //変換処理
-       if ($input_data['type'] === \Config::get('TYPE_LEND')) {
-           $input_data['borrow_user_id'] = $input_data['to_user_id'];
-           $input_data['lend_user_id']   = $input_data['my_user_id'];
-           
-       } else if ($input_data['type'] === \Config::get('TYPE_BORROW')) {
-           $input_data['lend_user_id']   = $input_data['to_user_id'];
-           $input_data['borrow_user_id'] = $input_data['my_user_id'];
-           
+       //insert処理
        } else {
-           $res = array('error' => true, 'msg' => 'type is not defined!', 'data' => null);
-           $this->response($res);
-           return;           
-       }
+            //バリデーションチェック
+            $validation_flg = $this->validation($input_data, $validation['lend_and_borrow']);
+           //エラーチェック
+           if ($validation_flg !== true) {
+               $res = array('error' => true, 'msg' => 'バリデーションエラー', 'error_data' => $validation_flg);
+               $this->response($res);
+               return;
+           }
+           
+            //ユーザチェック
+            if ($input_data['user_type'] === 'default') {
+                //何もしない
+
+             } else if ($input_data['user_type'] === 'facebook') {
+                 $lib_userprofile = new Lib_Userprofile($this->mongo_wrap);
+                 $user_profile    =  $lib_userprofile->get_user_profile($input_data['my_user_id']);
+
+                 //このIDのユーザが既に登録されているか？されていないなら登録！友達設定まで行うこと
+                 $to_user_id = $lib_userprofile->get_user_profile_id($input_data['to_user_id'], $input_data['target_user_name'], $input_data['user_type']);
+                 $input_data['to_user_id'] = $to_user_id; //取得したユーザID
+
+                 //友達登録
+                 $lib_userprofile->create_user_friend($user_profile, $to_user_id);            
+            }
+            //変換処理
+            if ($input_data['type'] === \Config::get('TYPE_LEND')) {
+                $input_data['borrow_user_id'] = $input_data['to_user_id'];
+                $input_data['lend_user_id']   = $input_data['my_user_id'];
+
+            } else if ($input_data['type'] === \Config::get('TYPE_BORROW')) {
+                $input_data['lend_user_id']   = $input_data['to_user_id'];
+                $input_data['borrow_user_id'] = $input_data['my_user_id'];
+
+            } else {
+                $res = array('error' => true, 'msg' => 'type is not defined!', 'data' => null);
+                $this->response($res);
+                return;           
+            }
+            //カテゴリがmoneyの場合、itemは数値
+            if ($input_data['category'] === 'money') {
+                $input_data['item'] = (int)$input_data['item'];
+            }
+            //コレクションに保存するデータのみ
+            $lend_and_borrow_keys = \Config::get('lend_and_borrow_keys');
+      }
+        
        
-       //カテゴリがmoneyの場合、itemは数値
-       if ($input_data['category'] === 'money') {
-           $input_data['item'] = (int)$input_data['item'];
-       }
-       
-       
-       //コレクションに保存するデータのみ
-       $lend_and_borrow_keys = \Config::get('lend_and_borrow_keys');       
        
        //collection_idがあれば編集
        if (isset($input_data['collection_id'])) {
@@ -122,16 +127,46 @@ class Controller_Rest_Lendandborrow extends Controller_Rest_Commonrest {
         \Lib_Mongowrap::update_data('lend_and_borrow', $lend_and_borrow_data);       
     }
     
+    /**
+     * 削除処理
+     */
     public function post_delete() {
        //Inputデータの取り組み
         $input_data = \Input::post();
-        $collection_id = (int)$input_data['collection_id'];       
+        $collection_id = (int)$input_data['collection_id'];
         $this->mongo_wrap->where(array('collection_id' => (int)$collection_id))->delete('lend_and_borrow');
         $res = array('error' => false);
-        $this->response($res);     
+        $this->response($res, 200);
     }
     
-    
+    /**
+     * トップページからのアクセス
+     */
+    public function post_top() {
+        $input_data = \Input::post();
+        $type = $input_data['type'];
+        $ids  = $input_data['checkbox'];
+        //削除処理
+        if ($type === 'delete') {
+            foreach ($ids as $id) {
+                $this->mongo_wrap->where(array('collection_id' => (int)$id))->delete('lend_and_borrow');        
+            }
+            
+        //ステータス変更
+        } else if ($type === 'status') {
+            $insert_data = array();
+            $insert_data['status'] = $input_data['status'];
+            
+            $update_key = array('status' => 'int');
+            foreach ($ids as $id) {
+                $insert_data['collection_id'] = $id;
+                $this->lend_and_borrow_update($update_key, $insert_data);
+            }
+        }
+        $res = array('error' => false);
+        $this->response($res, 200);
+        
+    }
     
     /*
      * Facebookの友達リストを返すAPI

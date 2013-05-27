@@ -16,9 +16,13 @@ function ingicater_end() {
 /**
  * Ajaxで送信する内容をDOMからキーバリュの形で取得する
  */
-function getSendData() {
+function getSendData(className) {
+    if (className === null) {
+        className = '.regist';
+    }
+    console.log(className);
     var sendData = {};
-    $.each($('.regist'), function () {
+    $.each($(className), function () {
         sendData[this.name] = this.value;
     });
     return sendData;
@@ -124,12 +128,14 @@ function rightmenu_toggle() {
 
 
 //URLのバーを見えなくするため
-$(function() {    
+$(function() {
+    /*
     window.addEventListener('load', function() {
         window.scrollTo(0, 1);
     },false);
 
     setTimeout("window.scrollTo(0,1)",500);
+    */
 });
 
 

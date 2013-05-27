@@ -52,20 +52,40 @@ class Controller_Lendandborrow extends Controller_Common {
      * 登録、編集ページ
      * 
      */
-    public function action_edit_data($type, $lend_and_borrow_id = null) {
+    public function action_edit($type, $collection_id = null) {
         
-        //ユーザの友達情報を取得する
-       	$this->view_data['user_friends'] = $this->lib_userprofile->get_user_friends();
-        
-        if ($lend_and_borrow_id !== null) {
-            //編集の場合情報を取得
-            $this->view_data['lend_and_borrow_mst'] = $this->lib_lendandborrow->get_lendandborrow_mst($lend_and_borrow_id);            
+        if ($collection_id === null) {
+            return ;
         }
 
-        $this->view_data['type']         = $type;        
+        //ステータス状況の取得
+        $this->view_data['status'] = \Config::get('status');
+
+        //編集の場合情報を取得
+        $lend_and_borrow_data = $this->lib_lendandborrow->get_lendandborrow_mst($collection_id);            
+        $this->view_data['lend_and_borrow_data'] = $lend_and_borrow_data;
+        
+        
+        //自分がどちらの立場かどうか？　lend : 貸している borrow:借りている
+        $this->view_data['type'] = $type;
+        if ($type === \Config::get('TYPE_LEND')) {
+            $your_type = 'borrow_user_id';
+        } else if ($type === \Config::get('TYPE_BORROW')) {
+            $your_type = 'lend_user_id';        
+        } else {
+            //error
+            return ;
+        }
+        
+        
+        $lib_userprofile = new Lib_Userprofile($this->mongo_wrap);
+        $this->view_data['your_user_profile'] = $lib_userprofile->get_user_profile($lend_and_borrow_data[$your_type]);
+        
+
         $this->viewWrap('lendandborrow/edit_view', '登録');
     }
         
+    
     /**
      * 新規登録ページ
      */

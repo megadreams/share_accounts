@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
 <?php echo $header?>
 <?php echo Asset::css('sp/lendandborrow.css'); ?>
