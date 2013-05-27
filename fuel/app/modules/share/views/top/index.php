@@ -57,10 +57,10 @@
                         <?php foreach ($view_data['borrow_list'] as $borrow_list):?>
                             <div class="list-view row-fluid">                            
                                 <div class="span1 checkbox" style="display:none;">
-                                    <input type="checkbox" name="borrowcheck" value="<?php echo $lend_list['collection_id'];?>">
+                                    <input type="checkbox" name="borrowcheck" value="<?php echo $borrow_list['collection_id'];?>">
                                 </div>
 
-                                <a href="<?php echo \Uri::base() . 'share/lendandborrow/edit/lend/' . $lend_list['collection_id'];?>">
+                                <a href="<?php echo \Uri::base() . 'share/lendandborrow/edit/lend/' . $borrow_list['collection_id'];?>">
                                 <div class="span11">
                                 
                                     <div class="text-left">
