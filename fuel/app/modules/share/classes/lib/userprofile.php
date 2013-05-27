@@ -45,19 +45,18 @@ class Lib_Userprofile {
      * 友達のユーザ情報の新規追加やチェックを行う所
      */
     public function get_user_profile_id($target_user_id, $target_user_name, $friend_type) {
-        
         //既にユーザが登録されているか？
         if ($friend_type === 'facebook') {
             $target = 'user_facebook_id';
         }
-        
-        $target_user = $this->mongo_wrap->where(array($target => (int)$target_user_id))->get_one('user_profile');
+        $target_user = $this->mongo_wrap->where(array($target => $target_user_id))->get_one('user_profile');
         if (empty($target_user)) {
             $insert_data = $this->model_user_profile();
-            $insert_data[$target]     = (int)$target_user_id;
+            $insert_data[$target]     = $target_user_id;
             $insert_data['user_name'] = $target_user_name;
+            
             \Lib_Mongowrap::insert_data('user_profile', $insert_data);       
-            $target_user = $this->mongo_wrap->where(array($target => (int)$target_user_id))->get_one('user_profile');
+            $target_user = $this->mongo_wrap->where(array($target => $target_user_id))->get_one('user_profile');
         }
         
         return $target_user['user_id'];

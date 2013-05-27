@@ -60,7 +60,7 @@
                                     <input type="checkbox" name="borrowcheck" value="<?php echo $borrow_list['collection_id'];?>">
                                 </div>
 
-                                <a href="<?php echo \Uri::base() . 'share/lendandborrow/edit/lend/' . $borrow_list['collection_id'];?>">
+                                <a href="<?php echo \Uri::base() . 'share/lendandborrow/edit/borrow/' . $borrow_list['collection_id'];?>">
                                 <div class="span11">
                                 
                                     <div class="text-left">

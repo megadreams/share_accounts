@@ -30,7 +30,7 @@
                         いつ
                     </div>
                     <div class="span10">
-                        <input type="text" class="regist lib_date" name="date" value="">                
+                        <input type="text" class="regist lib_date" name="date" value="<?php echo date('Y/m/d');?>">                
                     </div>
                 </div>
                 
